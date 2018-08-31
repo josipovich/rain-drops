@@ -1,0 +1,37 @@
+.current-weather {
+    float: right;
+    width: 35em;
+}
+
+.city-name {
+    text-transform: uppercase;
+    font-size: 2em;
+    font-family: 'Heebo', sans-serif;
+    display: inline-block;
+}
+
+.temperature {
+    margin-top: -.75em;
+    opacity: .5;
+}
+
+.temperature-val {
+    font-size: 6em;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.temperature-unit {
+    font-size: 1.2em;
+    vertical-align: top;
+    margin: 1em 0 0 .3em;
+    display: inline-block;
+}
+
+.measurement-time {
+    font-size: .8em;
+    opacity: .5;
+    margin-top: .5em;
+    font-weight: normal;
+    font-style: italic;
+}
