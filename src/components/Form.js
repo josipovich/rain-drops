@@ -17,13 +17,13 @@ export default () => {
     return (
         <form className='search-form' onSubmit={handleSubmit}>
             <input
-                className='search-form__input'
+                className='search-form-input'
                 placeholder="Type in the city name..."
                 type="text"
                 onChange={handleChange}
             />
             <input 
-                className='search-form__button'
+                className='search-form-button'
                 type="submit"
                 value="Get Weather"
             />
