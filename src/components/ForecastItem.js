@@ -6,7 +6,7 @@ import capitalize from './../lib/capitalize'
 export default (props) => {
     const data = props.forecast
     const locale = navigator.languages[0] || navigator.language || 'en-GB'
-	const timeFormatted = moment.unix(data.dt).local(locale).format('h a')
+    const timeFormatted = moment.unix(data.dt).local(locale).format('h a')
     const temp = `${data.main.temp.toFixed(0)}`
     const descShort = `${capitalize(data.weather[0].main)}:`
     const descLong = capitalize(data.weather[0].description)
