@@ -1,5 +1,5 @@
 import { store } from 'react-easy-state'
-import fetchWeather from '../utils/fetchWeather'
+import fetchWeather from '../lib/fetchWeather'
 
 const appStore = store({ 
     forecast: undefined,

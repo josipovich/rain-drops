@@ -1,5 +1,5 @@
 export default function (angle) {
-  const directions = 8    
+  const directions = 8
   const degree = 360 / directions
   angle = angle + degree/2
 

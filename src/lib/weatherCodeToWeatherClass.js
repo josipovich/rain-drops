@@ -22,7 +22,7 @@ export default code => {
             break;
         case code[0] === '8':
             color = 'clouds'
-            break;               
+            break;
     }
     return color
 }

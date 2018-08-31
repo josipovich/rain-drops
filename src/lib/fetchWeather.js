@@ -7,8 +7,8 @@ export default function ({city, metric = true}) {
     , units = `&units=${metric ? 'metric' : 'imperial'}`
     , forecastUrl = base + forecast + city + units + key
     , currentUrl = base + weather + city + units + key 
-    , current = fetch(currentUrl).catch(err => console.log(err)) 
-      forecast = fetch(forecastUrl).catch(err => console.log(err)) 
+    , current = fetch(currentUrl).catch(err => console.log(err))
+      forecast = fetch(forecastUrl).catch(err => console.log(err))
 
   return { forecast, current }
 }

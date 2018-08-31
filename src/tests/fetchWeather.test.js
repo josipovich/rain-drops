@@ -1,4 +1,4 @@
-import fetchWeather from './fetchWeather'
+import fetchWeather from './../lib/fetchWeather'
 
 test('fetchWeather function', function (){
 

@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
+import Form from './components/Form'
+import Results from './components/Results'
 import appStore from './stores/appStore'
-import { view } from 'react-easy-state'
-import Form from './Form'
-import Results from './Results'
-import './App.css';
+import {view} from 'react-easy-state'
+import './styles/App.css'
 
 
 // const App = () => {
@@ -19,8 +19,8 @@ import './App.css';
 class App extends Component {
   constructor(){
     super()
-    appStore.fetchCurrent({city: 'Sombor'})
-    appStore.fetchForecast({city: 'Sombor'})
+    appStore.fetchCurrent({city: 'Berlin'})
+    appStore.fetchForecast({city: 'Berlin'})
   }
   render() {
     return (
