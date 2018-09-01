@@ -1,5 +1,5 @@
 .forecast-weather {
-    margin-top: 2em;
+    margin-top: 1em;
 }
 
 .forecast-items {
@@ -98,7 +98,7 @@
 }
 
 .forecast-legend {
-    margin: 1em 0;
+    margin-bottom: 1em;
     display: table;
     width: 100%;
 }
