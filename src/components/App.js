@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import Form from './components/Form'
-import Results from './components/Results'
-import appStore from './stores/appStore'
+import Form from './Form'
+import Results from './Results'
+import appStore from './../stores/appStore'
 import {view} from 'react-easy-state'
-import './styles/App.css'
+import './../styles/App.css'
 
 
 // const App = () => {
