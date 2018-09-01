@@ -18,7 +18,7 @@ npm install
 npm start
 ```
 
-You'll need API key for OpenWeatherMap and you can get one for free [here](https://openweathermap.org/api). Just add it to `.env` file as REACT_APP_OPENWEATHER_KEY and restart the server.
+You'll need API key for OpenWeatherMap and you can get one for free [here](https://openweathermap.org/appid). Just add it to `.env` file as `REACT_APP_OPENWEATHER_KEY` and restart the server.
 
 For more info on build, deployment and testing please visit [Create React App](https://github.com/facebookincubator/create-react-app).
 
