@@ -8,21 +8,36 @@ import codeToWeatherClass from './../lib/weatherCodeToWeatherClass'
 import './../styles/Forecast.css'
 
 
+const getHours = time => (new Date(time*1000)).getHours()
+
+const getNightOrDay = (time, sunrise, sunset) => {    
+    const isDay = getHours(time) > getHours(sunrise) 
+        && getHours(time) < getHours(sunset)
+        
+    return isDay ? 'day' : 'night'
+}
+
 const groupForecastListByDay = forecastList => {
     return _.chain(forecastList)
     // extend data so we can easier group forecasts
     .map(data => {
         const weatherClass = codeToWeatherClass(data.weather[0].id)
         const day = moment.unix(data.dt).format('dddd')
-        return {weatherClass, day, ...data}
+        const nightOrDay = getNightOrDay(
+            data.dt, 
+            appStore.currentSunrise, 
+            appStore.currentSunset
+        )
+        return { nightOrDay, weatherClass, day, ...data}
     })
     .groupBy('day')
     // to improve grouping
     .map((forecast, day) => ({forecast, day}))
     .value()
-}
+} 
 
-const groupedForecastsToComponents = groupedForecast => {    
+const groupedForecastsToComponents = groupedForecast => {   
+    console.log(groupedForecast) 
     return groupedForecast.map((dayGroup, i) => {
             // change first day str to today 
             const dayName = i === 0 ? 'TODAY' : dayGroup.day.substr(0, 3).toUpperCase()

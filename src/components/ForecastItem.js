@@ -11,9 +11,10 @@ export default (props) => {
     const descShort = `${capitalize(data.weather[0].main)}:`
     const descLong = capitalize(data.weather[0].description)
     const weatherClass = data.weatherClass
+    const nightOrDay = data.nightOrDay
 
     return (
-        <div className={`forecast-item ${weatherClass}`}>
+        <div className={`forecast-item ${weatherClass} ${nightOrDay}`}>
             <div className="forecast-time">{timeFormatted}</div>
             <div className="forecast-temp">{temp}<span className="forecast-temp-unit">°C</span></div>
             <div className="forecast-description">

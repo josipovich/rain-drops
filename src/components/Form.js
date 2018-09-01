@@ -17,7 +17,7 @@ export default () => {
         <form className='search-form' onSubmit={handleSubmit}>
             <input
                 className='search-form-input'
-                placeholder="Type in the city name..."
+                placeholder="Type in city name (eg 'London, US' or just 'london')..."
                 type="text"
                 onChange={handleChange}
             />

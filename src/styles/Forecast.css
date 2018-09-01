@@ -40,6 +40,10 @@
     padding: .5em
 }
 
+.forecast-item.night {
+    border-left: 1em solid #009ec5 
+}
+
 .forecast-time,
 .forecast-temp,
 .forecast-description {
