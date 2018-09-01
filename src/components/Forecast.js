@@ -3,6 +3,7 @@ import moment from 'moment'
 import _ from 'lodash'
 import appStore from './../stores/appStore'
 import ForecastItem from './ForecastItem'
+import ForecastLegend from './ForecastLegend'
 import codeToWeatherClass from './../lib/weatherCodeToWeatherClass'
 import './../styles/Forecast.css'
 
@@ -45,7 +46,10 @@ export default () => {
 
     return (
         <div className="forecast-weather">
-            {forecastItems}
+            <ForecastLegend />
+            <div className="forecast-items">
+                {forecastItems}
+            </div>    
         </div>
     )
 }

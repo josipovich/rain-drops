@@ -7,6 +7,7 @@ const appStore = store({
     loadingText: 'Fetching Results...',
     currentInProgress: false,
     forecastInProgress: false,
+    weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm'],
 
     fetchWeather (city) {
         appStore.currentInProgress = true
