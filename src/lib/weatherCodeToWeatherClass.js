@@ -1,6 +1,6 @@
 export default code => {
     let color
-    code += ''
+    code += ''    
     switch (true) {
         case code[0] === '2':
             color = 'thunderstorm'
@@ -22,6 +22,9 @@ export default code => {
             break;
         case code[0] === '8':
             color = 'clouds'
+            break;
+        default:
+            color = 'snow'
             break;
     }
     return color
