@@ -10,8 +10,7 @@ export default () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        appStore.fetchCurrent({city: appStore.cityName})
-        appStore.fetchForecast({city: appStore.cityName})
+        appStore.fetchWeather({city: appStore.cityName})
     }
 
     return (

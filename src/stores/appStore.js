@@ -2,27 +2,39 @@ import { store } from 'react-easy-state'
 import fetchWeather from '../lib/fetchWeather'
 
 const appStore = store({ 
-    forecast: undefined,
+    forecast: null,
     current: null,
-    loadingText: 'Loading...',
-    dots: '...',
-      
-    async fetchCurrent (city) {
-        appStore.loading = true
-        let response = await fetchWeather(city).current
-        let current = response ? await response.json() : null
-        appStore.current = current    
-        appStore.loading = false
-    },
+    loadingText: 'Fetching Results...',
+    currentInProgress: false,
+    forecastInProgress: false,
 
-    async fetchForecast (city) {
-        appStore.loading = true
-        let response = await fetchWeather(city).forecast
-        let forecast = response ? await response.json() : null
-        appStore.forecast = forecast    
-        console.log('forecast', forecast)
-        appStore.loading = false
+    fetchWeather (city) {
+        appStore.currentInProgress = true
+        appStore.forecastInProgress = true
+
+        // returns two promises
+        const weather = fetchWeather(city)
+
+        Promise.all([weather.current, weather.forecast])
+            .then(data =>{     
+                // TODO: add condition before  looping
+                data.forEach(data => {                    
+                    if (`${data.cod}` === '200') {
+                        const type = data.list ? 'forecast' : 'current'
+                        appStore[type] = data
+                        appStore[`${type}InProgress`] = false  
+                    } else {
+                        appStore.forecast = appStore.current = data
+                        appStore.currentInProgress = appStore.forecastInProgress = false
+                    }                 
+                })            
+            }).catch(err => {
+                console.error(`Ops! Perhaps check you url. ${err}`)
+                appStore.current = appStore.forecast = {cod: '404', message: "Something went wrong"}
+                appStore.currentInProgress = appStore.forecastInProgress = false
+            })
     }
+
 })
 
 export default appStore
