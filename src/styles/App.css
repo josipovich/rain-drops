@@ -1,4 +1,14 @@
 .App {
-  margin: auto;
-  width: 900px; 
+    margin: auto;
+    width: 900px; 
+}
+
+.loading {
+    text-align: center;
+}
+
+.loading-animation {
+    height: 5em;
+    display: block;
+    margin:  4em auto 1em;
 }
