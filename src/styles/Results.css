@@ -5,3 +5,7 @@
     height: 0;
     clear: both;
 }
+
+.warning-msg {
+    text-transform: capitalize;
+}
