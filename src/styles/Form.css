@@ -29,3 +29,7 @@
     background-color: #eee;
     color: #222222
 }
+
+.search-form-button:hover {
+    cursor: pointer;
+}
