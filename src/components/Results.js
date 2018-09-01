@@ -8,6 +8,7 @@ import './../styles/Results.css'
 
 
 const somethingIsWrong = () => {
+    // TODO: do this to actually check is it something else than 200, it will be nicer
     const cods = [`${appStore.current.cod}`, `${appStore.forecast.cod}`]
     const badCods = ['401', '404', '400']
     return cods.some(cod => badCods.includes(cod))
@@ -20,9 +21,9 @@ export default () => {
             <div className="results">
                 <div className="results-top-row">
                     <CityMap />
-                    <CurrentWeather current={appStore.current} />
+                    <CurrentWeather />
                 </div>
-                <ForecastWeather forecast={appStore.forecast} />        
+                <ForecastWeather />        
             </div>
         )
 }

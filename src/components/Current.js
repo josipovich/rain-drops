@@ -1,11 +1,13 @@
 import React from 'react'
 import moment from 'moment'
+import appStore from './../stores/appStore' 
 import windAngleToDirection from './../lib/windAngleToDirection'
 import capitalize from './../lib/capitalize'
 import './../styles/Current.css'
 
 
-export default ({current}) => {
+export default () => {
+    const current = appStore.current
     const city = `${current.name}, ${current.sys.country}`
     const temp = `${current.main.temp.toFixed(0)}`
     const wind = `${windAngleToDirection(current.wind.deg)} Wind (${current.wind.speed} m/s)`

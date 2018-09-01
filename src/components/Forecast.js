@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import _ from 'lodash'
+import appStore from './../stores/appStore'
 import ForecastItem from './ForecastItem'
 import codeToWeatherClass from './../lib/weatherCodeToWeatherClass'
 import './../styles/Forecast.css'
@@ -37,7 +38,8 @@ const groupedForecastsToComponents = groupedForecast => {
 
 }
 
-export default ({forecast}) => {
+export default () => {
+    const forecast = appStore.forecast
     const groupedForecasts = groupForecastListByDay(forecast.list)   
     const forecastItems = groupedForecastsToComponents(groupedForecasts)
 
