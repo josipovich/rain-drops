@@ -10,7 +10,7 @@
 /* today forcasts styles  */
 .forecast-items > div:first-of-type  {
     text-align: right;
-    padding-right: .83em;
+    padding-right: 1.165em;
 }
 
 .day-name {
@@ -32,8 +32,8 @@
 .forecast-item {
     font-size: .65em; 
     border: 1px solid #ccc;
-    width: 9.62em;
-    height: 9.62em;
+    width: 9.55em;
+    height: 9.55em;
     display: inline-block;
     vertical-align: top;
     margin: 0 .5em .5em 0;
