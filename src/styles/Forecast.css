@@ -27,10 +27,10 @@
 }
 
 .forecast-item {
-    font-size: .65em;
+    font-size: .65em; 
     border: 1px solid #ccc;
-    width: 100px;
-    height: 100px;
+    width: 9.62em;
+    height: 9.62em;
     display: inline-block;
     vertical-align: top;
     margin: 0 .5em .5em 0;
