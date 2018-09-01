@@ -6,18 +6,22 @@ import codeToWeatherClass from './../lib/weatherCodeToWeatherClass'
 import './../styles/Forecast.css'
 
 
-const forecastListToComponents = forecastList => {
+const groupForecastListByDay = forecastList => {
     return _.chain(forecastList)
-        // extend data so we can easier group forecasts
-        .map(data => {
-            const weatherClass = codeToWeatherClass(data.weather[0].id)
-            const day = moment.unix(data.dt).format('dddd')
-            return {weatherClass, day, ...data}
-        })
-        .groupBy('day')
-        // to improve grouping
-        .map((forecast, day) => ({forecast, day}))        
-        .map((dayGroup, i) => {
+    // extend data so we can easier group forecasts
+    .map(data => {
+        const weatherClass = codeToWeatherClass(data.weather[0].id)
+        const day = moment.unix(data.dt).format('dddd')
+        return {weatherClass, day, ...data}
+    })
+    .groupBy('day')
+    // to improve grouping
+    .map((forecast, day) => ({forecast, day}))
+    .value()
+}
+
+const groupedForecastsToComponents = groupedForecast => {    
+    return groupedForecast.map((dayGroup, i) => {
             // change first day str to today 
             const dayName = i === 0 ? 'TODAY' : dayGroup.day.substr(0, 3).toUpperCase()
             const forecastsForThatDay = dayGroup.forecast.map((data, i) => {
@@ -30,11 +34,12 @@ const forecastListToComponents = forecastList => {
                 </div>
             )
         })
-        .value()
+
 }
 
 export default ({forecast}) => {
-    const forecastItems = forecastListToComponents(forecast.list)
+    const groupedForecasts = groupForecastListByDay(forecast.list)   
+    const forecastItems = groupedForecastsToComponents(groupedForecasts)
 
     return (
         <div className="forecast-weather">
