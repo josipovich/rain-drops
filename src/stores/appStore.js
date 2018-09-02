@@ -10,9 +10,9 @@ const _handleResponse = (store) => {
             data.forEach(data => {  
                 const type = data.list ? 'forecast' : 'current'
                 store[type] = data
-                store[`${type}InProgress`] = false   
-                console.log(type, data)  
-            }) 
+                store[`${type}InProgress`] = false                   
+            })
+            store.prevCityName = store.cityName
         } else {
             // data[0] b/c we don't care about mapping since both are the same in this case
             store.forecast = store.current = data[0]
@@ -30,15 +30,17 @@ const _handleError = (store) => {
 }
 
 const appStore = store({ 
+    cityName: '',
+    prevCityName: '',
     forecast: null,
     current: null,
-    loadingText: 'Fetching Results...',
     currentInProgress: false,
     forecastInProgress: false,
     weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm'],
 
     fetchWeather (city) {
         appStore.currentInProgress = appStore.forecastInProgress = true
+
         Promise
             .all(fetchWeather(city)) // returns two promises
             .then(_handleResponse(appStore))

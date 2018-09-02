@@ -9,10 +9,12 @@ export default ({forecast}) => {
     const descShort = `${capitalize(forecast.weather[0].main)}:`
     const descLong = capitalize(forecast.weather[0].description)
     const weatherClass = forecast.weatherClass
-    const night = forecast.daylight ? '' : 'night'
+    // const night = forecast.daylight ? '' : 'night'
+    const night = forecast.daylight ? '' : ''
+    const selected = forecast.selected ? 'selected' : ''
 
     return (
-        <div className={`forecast-item ${weatherClass} ${night}`}>
+        <div className={`forecast-item ${weatherClass} ${night} ${selected}`}>
             <div className="forecast-time">{timeFormatted}</div>
             <div className="forecast-temp">{temp}<span className="forecast-temp-unit">°C</span></div>
             <div className="forecast-description">
