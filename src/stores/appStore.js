@@ -37,12 +37,12 @@ const appStore = store({
     currentInProgress: false,
     forecastInProgress: false,
     weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm'],
+    selectedType: '',
 
     fetchWeather (city) {
         appStore.currentInProgress = appStore.forecastInProgress = true
 
-        Promise
-            .all(fetchWeather(city)) // returns two promises
+        Promise.all(fetchWeather(city)) // returns two promises
             .then(_handleResponse(appStore))
             .catch(_handleError(appStore))
     }

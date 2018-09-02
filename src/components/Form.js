@@ -14,7 +14,7 @@ export default view(
             e.preventDefault()
     
             if (appStore.prevCityName !== appStore.cityName) {   
-                appStore.hoveredType = ''        
+                appStore.selectedType = ''        
                 appStore.fetchWeather({city: appStore.cityName})            
             }        
         }

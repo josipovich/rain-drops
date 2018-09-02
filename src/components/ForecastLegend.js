@@ -7,8 +7,7 @@ const LegendCell = ({type}) => {
     const _handleClick = (e) => {
         const type = e.target.dataset.type   
         if (type === 'legend') return
-        appStore.hoveredType = type
-        console.log(appStore.hoveredType)
+        appStore.selectedType = type
     }
     
     return (

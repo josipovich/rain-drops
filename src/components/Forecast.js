@@ -8,14 +8,13 @@ import ForecastLegend from './ForecastLegend'
 import './../styles/Forecast.css'
 
 
-const _groupForecastListByDay = (forecast, sunrise, sunset, hoveredType) => {
+const _groupForecastListByDay = (forecast, sunrise, sunset, selectedType) => {
     return _.chain(forecast.list)
     // extend data so we can easier group forecasts
     // and also use that info for styling
     .map(data => {
         const weatherClass = weatherCodeToWeatherClass(data.weather[0].id)
-        const selected = hoveredType === weatherClass
-        console.log(hoveredType, weatherClass)
+        const selected = selectedType === weatherClass
         const day = moment(data.dt*1000).format('dddd')
         const daylight = isDaylight(
             moment(data.dt*1000).format('HH'), 
@@ -47,9 +46,8 @@ const _groupedForecastsToComponents = groupedForecast => {
 }
 
 export default view(
-    ({forecast, sunrise, sunset, weatherTypeList, hoveredType}) => {
-        console.log("hoveredType", hoveredType)
-        const groupedForecasts = _groupForecastListByDay(forecast, sunrise, sunset, hoveredType)
+    ({forecast, sunrise, sunset, weatherTypeList, selectedType}) => {
+        const groupedForecasts = _groupForecastListByDay(forecast, sunrise, sunset, selectedType)
         const forecastItems = _groupedForecastsToComponents(groupedForecasts)
     
         return (

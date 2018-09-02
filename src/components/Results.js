@@ -11,8 +11,7 @@ import './../styles/Results.css'
 
 export default view(
     () => {    
-        const showWarning = statusOk([`${appStore.current.cod}`, `${appStore.forecast.cod}`]) 
-        return showWarning 
+        return statusOk([`${appStore.current.cod}`, `${appStore.forecast.cod}`])  
             ? (
                 <div className="results">
                     <div className="results-top-row">
@@ -24,10 +23,10 @@ export default view(
                     </div>
                     <Forecast
                         forecast={appStore.forecast} 
-                        current={appStore.current.sys.sunrise}
+                        sunrise={appStore.current.sys.sunrise}
                         sunset={appStore.current.sys.sunset}
                         weatherTypeList={appStore.weatherTypeList}
-                        hoveredType={appStore.hoveredType}
+                        selectedType={appStore.selectedType}
                     />        
                 </div>
                 )
