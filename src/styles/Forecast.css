@@ -45,7 +45,8 @@
     border-left: 1em solid #009ec5;
 }
 
-.forecast-item.night::after {
+.sundown::after,
+.night::after {
     content: "";
     background: url("/night-bg.png");
     opacity: 0.2;
@@ -88,7 +89,8 @@
 /* Weather types, taken from openweahtermap api */
 .snow,
 .legend,
-.atmospherem {
+.atmosphere,
+.sundown {
     border: 1px solid #ccc;
     background-color: #fff;
 }
@@ -140,4 +142,9 @@
     font-family: 'Heebo', sans-serif;
     font-weight: bold;
     text-transform: uppercase
+}
+
+.legend-cell.sundown { 
+    position: relative; 
+    border-left: 1em solid #009ec5;
 }
