@@ -22,8 +22,8 @@ export default () => {
                 </div>
                 <Forecast
                     forecast={appStore.forecast} 
-                    sunrise={appStore.currentSunrise}
-                    sunset={appStore.currentSunset}
+                    sunrise={appStore.current.sys.sunrise}
+                    sunset={appStore.current.sys.sunset}
                     weatherTypeList={appStore.weatherTypeList}
                 />        
             </div>

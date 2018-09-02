@@ -103,6 +103,7 @@ const unixToHours = unix => (new Date(unix*1000)).getHours()
  * @returns {Boolean}   
  */
 const isDaylight = (time, sunrise, sunset) => {    
+    // console.log('time:', time,'; sunrise:', sunrise,'; sunset:', sunset)
     return time > sunrise && time <= sunset 
 }
 

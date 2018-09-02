@@ -4,13 +4,12 @@ import {capitalize} from './../lib/utils'
 
 
 export default ({forecast}) => {
-    const locale = navigator.languages[0] || navigator.language || 'en-GB'
-    const timeFormatted = moment.unix(forecast.dt).local(locale).format('h a')
+    const timeFormatted = `${moment(forecast.dt*1000).format('HH:mm')}h`
     const temp = `${forecast.main.temp.toFixed(0)}`
     const descShort = `${capitalize(forecast.weather[0].main)}:`
     const descLong = capitalize(forecast.weather[0].description)
     const weatherClass = forecast.weatherClass
-    const night = forecast.daylight ? "" : 'night'
+    const night = forecast.daylight ? '' : 'night'
 
     return (
         <div className={`forecast-item ${weatherClass} ${night}`}>

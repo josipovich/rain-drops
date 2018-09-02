@@ -3,22 +3,30 @@ import fetchWeather from '../lib/fetchWeather'
 import {statusOk} from '../lib/utils'
 
 
-const _saveWeatherData = (store, data) => {
-    data.forEach(data => {                    
-        const type = data.list ? 'forecast' : 'current'
-        store[type] = data
-        store[`${type}InProgress`] = false 
-        // take current sunrise and sunset for day/night 
-        if (type === 'current') {
-            store.currentSunrise = data.sys.sunrise
-            store.currentSunset = data.sys.sunset
-        }                            
-    }) 
+const _handleResponse = (store) => {
+    return (data) => {
+        const responseOk = statusOk(data.map(d => d.cod)) 
+        if (responseOk) {
+            data.forEach(data => {  
+                const type = data.list ? 'forecast' : 'current'
+                store[type] = data
+                store[`${type}InProgress`] = false   
+                console.log(type, data)  
+            }) 
+        } else {
+            // data[0] b/c we don't care about mapping since both are the same in this case
+            store.forecast = store.current = data[0]
+            store.currentInProgress = store.forecastInProgress = false        
+        }
+    }
 }
 
-const _showSomething = (store, data) => {
-    store.forecast = store.current = data[0]
-    store.currentInProgress = store.forecastInProgress = false
+const _handleError = (store) => {
+    return (err) => {
+        console.error(`Ops! Perhaps check you url. ${err}`)
+        store.current = store.forecast = {cod: '404', message: "Something went wrong"}
+        store.currentInProgress = store.forecastInProgress = false    
+    }
 }
 
 const appStore = store({ 
@@ -30,21 +38,12 @@ const appStore = store({
     weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm'],
 
     fetchWeather (city) {
-        appStore.currentInProgress = true
-        appStore.forecastInProgress = true
-        // returns two promises
-        const weather = fetchWeather(city)
-        Promise.all([weather.current, weather.forecast])
-            .then(data =>{    
-                const allFine = statusOk(data.map(d => d.cod)) 
-                allFine ? _saveWeatherData(appStore, data) : _showSomething(appStore, data)             
-            }).catch(err => {
-                console.error(`Ops! Perhaps check you url. ${err}`)
-                // '404' is not important, cod just has to be !== '200'
-                appStore.current = appStore.forecast = {cod: '404', message: "Something went wrong"}
-                appStore.currentInProgress = appStore.forecastInProgress = false
-            })
-    },
+        appStore.currentInProgress = appStore.forecastInProgress = true
+        Promise
+            .all(fetchWeather(city)) // returns two promises
+            .then(_handleResponse(appStore))
+            .catch(_handleError(appStore))
+    }
 })
 
 export default appStore

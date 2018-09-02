@@ -10,5 +10,5 @@ export default function ({city, metric = true}) {
         , current = fetch(currentUrl).then(res => res.json()) 
           forecast = fetch(forecastUrl).then(res => res.json()) 
 
-    return { forecast, current }
+    return [forecast, current]
 }

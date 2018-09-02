@@ -9,9 +9,8 @@ export default ({current}) => {
     const temp = `${current.main.temp.toFixed(0)}`
     const wind = `${angleToDirection(current.wind.deg)} Wind (${current.wind.speed} m/s)`
     const description = `${capitalize(current.weather[0].main)}, ${capitalize(current.weather[0].description)}`
-    const locale = (navigator.languages[0] || navigator.language) || 'en-GB'
-    const time = moment.unix(current.dt).local(locale)
-    const timeFormatted = `Measured ${capitalize(time.fromNow())} (${time.format('LT')})`
+    const time = moment(current.dt*1000)
+    const timeFormatted = `Measured ${capitalize(time.fromNow())} (${time.format('HH:mm')}h)`
 
     return (
         <div className="current-weather">
