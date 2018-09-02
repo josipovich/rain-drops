@@ -1,37 +1,23 @@
 import React from 'react'
-import appStore from './../stores/appStore'
+import PropTypes from 'prop-types'
 import {view} from 'react-easy-state'
+import ForecastLegendCell from './ForecastLegendCell'
 
 
-const LegendCell = ({type}) => {
-    const _handleClick = (e) => {
-        const type = e.target.dataset.type   
-        if (type === 'legend') return
-        appStore.selectedType = type
-    }
-    
+const ForecastLegend = ({weatherTypeList}) => {
+    // const types = ['legend', 'sundown', ...weatherTypeList]
+    const types = ['legend', ...weatherTypeList]    
+    const LegendCells = types.map((type, i) => <ForecastLegendCell key={i} type={type}/>)
+
     return (
-        <div 
-            data-type={type}
-            onClick={_handleClick} 
-            className={`legend-cell ${type}`}
-        >
-            {type}
+        <div className="forecast-legend">
+            {LegendCells}
         </div>
     )
 }
 
+ForecastLegend.propTypes = {
+    weatherTypeList: PropTypes.array.isRequired
+}
 
-export default view(
-    ({weatherTypeList}) => {
-        // const types = ['legend', 'sundown', ...weatherTypeList]
-        const types = ['legend', ...weatherTypeList]    
-        const LegendCells = types.map((type, i) => <LegendCell key={i} type={type}/>)
-    
-        return (
-            <div className="forecast-legend">
-                {LegendCells}
-            </div>
-        )
-    }
-)
+export default view(ForecastLegend)

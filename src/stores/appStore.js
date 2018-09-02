@@ -18,6 +18,9 @@ const _handleResponse = (store) => {
             store.forecast = store.current = data[0]
             store.currentInProgress = store.forecastInProgress = false        
         }
+
+        console.log('current', store.current)
+        console.log('forecast', store.forecast)
     }
 }
 
