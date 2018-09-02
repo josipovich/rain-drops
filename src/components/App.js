@@ -15,7 +15,7 @@ const App = () => {
         <div className="App">
             <Form />
             { showResults ? <Results /> : '' }
-            { isLoading ? <Loading /> : '' }
+            { isLoading ? <Loading loadingText={appStore.loadingText} /> : '' }
         </div>
     )
 }

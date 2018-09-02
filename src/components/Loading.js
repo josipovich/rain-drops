@@ -1,13 +1,12 @@
 import React from 'react'
-import appStore from './../stores/appStore'
 import logo from './../loading-animation.svg'
 
 
-export default () => {
+export default ({loadingText}) => {
     return (
         <div className="loading">
             <img src={logo} className="loading-animation" alt="logo" />
-            {appStore.loadingText}
+            {loadingText}
         </div>
     )
 }
