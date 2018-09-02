@@ -1,10 +1,8 @@
 import React, {Component} from 'react'
-import {view} from 'react-easy-state'
 import L from 'leaflet'
 
 
-
-class CityMaps extends Component {
+export default class extends Component {
     componentDidMount() {
         this.locationAdjusted = [this.props.location[0] + 2, this.props.location[1]]
         this.layers = [
@@ -39,5 +37,3 @@ class CityMaps extends Component {
         return <div id="city-map"></div>
     }
 }
-
-export default view(CityMaps)

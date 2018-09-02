@@ -1,29 +1,32 @@
 import React from 'react'
 import appStore from './../stores/appStore'
-import CurrentWeather from './Current'
-import ForecastWeather from './Forecast'
+import statusOk from './../lib/statusOk'
+import Current from './Current'
+import Forecast from './Forecast'
 import Warning from './Warning'
 import CityMap from './CityMap'
 import './../styles/Results.css'
 
 
-const somethingIsWrong = () => {
-    // TODO: do this to actually check is it something else than 200, it will be nicer
-    const cods = [`${appStore.current.cod}`, `${appStore.forecast.cod}`]
-    const badCods = ['401', '404', '400']
-    return cods.some(cod => badCods.includes(cod))
-}          
-
-export default () => {
-    return somethingIsWrong() 
-        ? <Warning message={appStore.current.message} />
-        : (
+export default () => {    
+    const showWarning = statusOk([`${appStore.current.cod}`, `${appStore.forecast.cod}`]) 
+    return showWarning 
+        ? (
             <div className="results">
                 <div className="results-top-row">
-                    <CityMap />
-                    <CurrentWeather />
+                    <CityMap 
+                        cityName={appStore.current.name} 
+                        location={[appStore.current.coord.lat, appStore.current.coord.lon]} 
+                    />
+                    <Current current={appStore.current} />
                 </div>
-                <ForecastWeather />        
+                <Forecast
+                    forecast={appStore.forecast} 
+                    sunrise={appStore.currentSunrise}
+                    sunset={appStore.currentSunset}
+                    weatherTypeList={appStore.weatherTypeList}
+                />        
             </div>
-        )
+            )
+        : <Warning message={appStore.current.message} />
 }

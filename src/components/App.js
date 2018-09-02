@@ -1,30 +1,23 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {view} from 'react-easy-state'
+import appStore from './../stores/appStore'
 import Loading from './Loading'
 import Form from './Form'
 import Results from './Results'
-import appStore from './../stores/appStore'
 import './../styles/App.css'
 
 
-class App extends Component {
-    constructor(){
-        super()
-        appStore.fetchWeather({city: 'Berlin'})
-    }
+const App = () => {
+    const isLoading = appStore.forecastInProgress || appStore.currentInProgress
+    const showResults = appStore.current && appStore.forecast
 
-    render() {
-        const isLoading = appStore.forecastInProgress || appStore.currentInProgress
-        const showResults = appStore.current && appStore.forecast
-
-        return (
-            <div className="App">
-                <Form />
-                { showResults ? <Results /> : '' }
-                { isLoading ? <Loading /> : '' }
-            </div>
-        )
-    }
+    return (
+        <div className="App">
+            <Form />
+            { showResults ? <Results /> : '' }
+            { isLoading ? <Loading /> : '' }
+        </div>
+    )
 }
 
 export default view(App)

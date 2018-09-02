@@ -22,9 +22,9 @@ const appStore = store({
                 data.forEach(data => {                    
                     if (`${data.cod}` === '200') {
                         const type = data.list ? 'forecast' : 'current'
-                        console.log(data)
                         appStore[type] = data
-                        appStore[`${type}InProgress`] = false  
+                        appStore[`${type}InProgress`] = false 
+                        // take current sunrise and sunset for day/night 
                         if (type === 'current') {
                             appStore.currentSunrise = data.sys.sunrise
                             appStore.currentSunset = data.sys.sunset
