@@ -13,9 +13,11 @@ const App = () => {
 
     return (
         <div className="App">
-            <Form />
-            { showResults ? <Results /> : '' }
-            { isLoading ? <Loading /> : '' }
+            <React.StrictMode>
+                <Form />
+                { showResults ? <Results /> : '' }
+                { isLoading ? <Loading /> : '' }
+            </React.StrictMode>
         </div>
     )
 }
