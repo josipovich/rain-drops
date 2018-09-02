@@ -37,11 +37,24 @@
     display: inline-block;
     vertical-align: top;
     margin: 0 .5em .5em 0;
-    padding: .5em
+    padding: .5em;
+    position: relative;
 }
 
 .forecast-item.night {
-    border-left: 1em solid #009ec5 
+    border-left: 1em solid #009ec5;
+}
+
+.forecast-item.night::after {
+    content: "";
+    background: url("/night-bg.png");
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 2; 
 }
 
 .forecast-time,
