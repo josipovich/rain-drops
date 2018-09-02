@@ -11,27 +11,27 @@ import './../styles/Results.css'
 
 // export default view(
 
-const Results = () => {    
-    return statusOk([`${appStore.current.cod}`, `${appStore.forecast.cod}`])  
+const Results = (props) => {    
+    return statusOk(props.cods)  
         ? (
             <div className="results">
                 <div className="results-top-row">
                     <CityMap 
-                        cityName={appStore.current.name} 
-                        location={[appStore.current.coord.lat, appStore.current.coord.lon]} 
+                        cityName={props.cityName} 
+                        location={props.location} 
                     />
-                    <Current current={appStore.current} />
+                    <Current current={props.current} />
                 </div>
                 <Forecast
-                    forecast={appStore.forecast} 
-                    sunrise={appStore.current.sys.sunrise}
-                    sunset={appStore.current.sys.sunset}
-                    weatherTypeList={appStore.weatherTypeList}
-                    selectedType={appStore.selectedType}
+                    forecast={props.forecast} 
+                    sunrise={props.sunrise}
+                    sunset={props.sunset}
+                    weatherTypeList={props.weatherTypeList}
+                    selectedType={props.selectedType}
                 />        
             </div>
             )
-        : <Warning message={appStore.current.message} />
+        : <Warning message={props.message} />
 }
 
 export default Results

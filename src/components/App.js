@@ -15,7 +15,21 @@ const App = () => {
         <div className="App">
             <React.StrictMode>
                 <Form />
-                { showResults ? <Results /> : '' }
+                { showResults ? <Results 
+                        cityName={appStore.current.name} 
+                        location={[
+                            appStore.current.coord ? appStore.current.coord.lat : 0, 
+                            appStore.current.coord ? appStore.current.coord.lon : 0
+                        ]}
+                        cods={[`${appStore.current.cod}`, `${appStore.forecast.cod}`]}
+                        current={appStore.current}
+                        forecast={appStore.forecast} 
+                        sunrise={appStore.current.sys ? appStore.current.sys.sunrise : 0}
+                        sunset={appStore.current.sys ? appStore.current.sys.sunset : 0}
+                        weatherTypeList={appStore.weatherTypeList}
+                        selectedType={appStore.selectedType}
+                        message={appStore.current.message} 
+                    /> : '' }
                 { isLoading ? <Loading /> : '' }
             </React.StrictMode>
         </div>

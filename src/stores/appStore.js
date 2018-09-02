@@ -13,6 +13,7 @@ const _handleResponse = (store) => {
                 store[`${type}InProgress`] = false                   
             })
             store.prevCityName = store.cityName
+            store.selectedType = ''
         } else {
             // data[0] b/c we don't care about mapping since both are the same in this case
             store.forecast = store.current = data[0]
