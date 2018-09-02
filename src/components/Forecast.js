@@ -3,26 +3,22 @@ import moment from 'moment'
 import _ from 'lodash'
 import ForecastItem from './ForecastItem'
 import ForecastLegend from './ForecastLegend'
-import codeToWeatherClass from './../lib/weatherCodeToWeatherClass'
+import {weatherCodeToWeatherClass, isDaylight, unixToHours} from './../lib/utils'
 import './../styles/Forecast.css'
 
 
-const getHours = time => (new Date(time*1000)).getHours()
-
-const isDaylight = (time, sunrise, sunset) => {    
-    const daylight = getHours(time) > getHours(sunrise) 
-        && getHours(time) < getHours(sunset)
-        
-    return daylight 
-}
-
-const groupForecastListByDay = (forecastList, sunrise, sunset) => {
+const _groupForecastListByDay = (forecastList, sunrise, sunset) => {
     return _.chain(forecastList)
     // extend data so we can easier group forecasts
+    // and also use that info for styling
     .map(data => {
-        const weatherClass = codeToWeatherClass(data.weather[0].id)
+        const weatherClass = weatherCodeToWeatherClass(data.weather[0].id)
         const day = moment.unix(data.dt).format('dddd')
-        const daylight = isDaylight(data.dt, sunrise, sunset)
+        const daylight = isDaylight(
+            unixToHours(data.dt), 
+            unixToHours(sunrise), 
+            unixToHours(sunset)
+        )
         return {daylight, weatherClass, day, ...data}
     })
     .groupBy('day')
@@ -31,7 +27,7 @@ const groupForecastListByDay = (forecastList, sunrise, sunset) => {
     .value()
 } 
 
-const groupedForecastsToComponents = groupedForecast => {   
+const _groupedForecastsToComponents = groupedForecast => {   
     return groupedForecast.map((dayGroup, i) => {
         // change first day str to today 
         const dayName = i === 0 ? 'TODAY' : dayGroup.day.substr(0, 3).toUpperCase()
@@ -48,8 +44,8 @@ const groupedForecastsToComponents = groupedForecast => {
 }
 
 export default (props) => {
-    const groupedForecasts = groupForecastListByDay(props.forecast.list, props.sunrise, props.sunset)
-    const forecastItems = groupedForecastsToComponents(groupedForecasts)
+    const groupedForecasts = _groupForecastListByDay(props.forecast.list, props.sunrise, props.sunset)
+    const forecastItems = _groupedForecastsToComponents(groupedForecasts)
 
     return (
         <div className="forecast-weather">

@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import capitalize from './../lib/capitalize'
+import {capitalize} from './../lib/utils'
 
 
 export default ({forecast}) => {

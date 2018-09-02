@@ -1,6 +1,6 @@
 import React from 'react'
 import appStore from './../stores/appStore'
-import statusOk from './../lib/statusOk'
+import {statusOk} from './../lib/utils'
 import Current from './Current'
 import Forecast from './Forecast'
 import Warning from './Warning'
