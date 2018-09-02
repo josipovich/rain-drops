@@ -9,7 +9,6 @@
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-easy-state": "^5.1.0",
-    "react-leaflet": "^2.0.1",
     "react-scripts": "1.1.5"
   },
   "scripts": {
