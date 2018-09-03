@@ -26,6 +26,9 @@ const Results = props => {
                     sunset={props.sunset}
                     weatherTypeList={props.weatherTypeList}
                     selectedType={props.selectedType}
+                    selectedForecast={props.selectedForecast}
+                    showForecastDetail={props.showForecastDetail}
+                    selectedForecast={props.selectedForecast}
                     handleClick={props.handleLegendClick}
                 />        
             </div>

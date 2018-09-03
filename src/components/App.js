@@ -31,12 +31,15 @@ const App = () => {
                         // Current
                         current={appStore.current}
                         // Forecast
-                        forecast={appStore.forecast}                         
+                        forecast={appStore.forecast}                   
                         sunrise={appStore.current.sys ? appStore.current.sys.sunrise : 0}
                         sunset={appStore.current.sys ? appStore.current.sys.sunset : 0}
                         weatherTypeList={appStore.weatherTypeList}                        
                         selectedType={appStore.selectedType}
+                        selectedForecast={appStore.selectedForecast}
                         handleLegendClick={appStore.handleLegendClick}
+                        showForecastDetail={appStore.showForecastDetail}
+                        selectedForecast={appStore.selectedForecast}
                         // Warning
                         message={appStore.current.message} 
                     /> : '' }

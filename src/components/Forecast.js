@@ -6,6 +6,7 @@ import {view} from 'react-easy-state'
 import {weatherCodeToWeatherClass, isDaylight} from './../lib/utils'
 import ForecastItem from './ForecastItem'
 import ForecastLegend from './ForecastLegend'
+import ForecastItemDetails from './ForecastItemDetails'
 import './../styles/Forecast.css'
 
 
@@ -46,9 +47,10 @@ const _groupedForecastsToComponents = groupedForecast => {
     })
 }
 
-const Forecst = ({forecast, sunrise, sunset, weatherTypeList, selectedType, handleClick}) => {
+const Forecst = ({forecast, sunrise, sunset, weatherTypeList, selectedType, handleClick, selectedForecast, showForecastDetail}) => {
     const groupedForecasts = _groupForecastListByDay(forecast, sunrise, sunset, selectedType)
     const forecastItems = _groupedForecastsToComponents(groupedForecasts)
+    console.log("showForecastDetail", showForecastDetail)
 
     return (
         <div className="forecast-weather">
@@ -57,7 +59,11 @@ const Forecst = ({forecast, sunrise, sunset, weatherTypeList, selectedType, hand
                 weatherTypeList={weatherTypeList}
             />
             <div className="forecast-items">
-                {forecastItems}
+                {
+                    showForecastDetail 
+                    ? <ForecastItemDetails selectedForecast={selectedForecast} />
+                    : forecastItems 
+                }
             </div>
         </div>
     )

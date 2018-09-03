@@ -1,8 +1,11 @@
 import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
+import appStore from './../stores/appStore'
 import {capitalize} from './../lib/utils'
-import { view } from 'react-easy-state'
+import {view} from 'react-easy-state'
+
+
 
 
 const ForecastItem = ({forecast}) => {
@@ -16,12 +19,18 @@ const ForecastItem = ({forecast}) => {
     const selected = forecast.selected ? 'selected' : ''
 
     return (
-        <div className={`forecast-item ${weatherClass} ${night} ${selected}`}>
-            <div className="forecast-time">{timeFormatted}</div>
-            <div className="forecast-temp">{temp}<span className="forecast-temp-unit">°C</span></div>
-            <div className="forecast-description">
-                {descShort}
-                <br />{descLong}
+        <div 
+            id={forecast.dt}
+            className={`forecast-item ${weatherClass} ${night} ${selected}`}
+            onClick={appStore.handleForecastClick}
+        >
+            <div>
+                <div className="forecast-time">{timeFormatted}</div>
+                <div className="forecast-temp">{temp}<span className="forecast-temp-unit">°C</span></div>
+                <div className="forecast-description">
+                    {descShort}
+                    <br />{descLong}
+                </div>
             </div>
         </div>
     )

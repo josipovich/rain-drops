@@ -18,8 +18,8 @@ const _handleResponse = (store) => {
             store.forecast = store.current = data[0]
             store.currentInProgress = store.forecastInProgress = false        
         }
-        // console.log('current', store.current)
-        // console.log('forecast', store.forecast)
+        console.log('current', store.current)
+        console.log('forecast', store.forecast)
     }
 }
 
@@ -32,39 +32,57 @@ const _handleError = (store) => {
 }
 
 const appStore = store({ 
-    cityName: '',
-    forecast: null,
-    current: null,
-    currentInProgress: false,
-    forecastInProgress: false,
-    weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm'],
-    selectedType: '',
+      cityName: ''
+    , forecast: null
+    , current: null
+    , currentInProgress: false
+    , forecastInProgress: false
+    , weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm']
+    , selectedType: ''
+    , selectedForecast: null
+    , showForecastDetail: false
 
-    fetchWeather(city) {
+    , fetchWeather(city) {
         appStore.currentInProgress = appStore.forecastInProgress = true
 
         Promise.all(fetchWeather(city)) // returns two promises
             .then(_handleResponse(appStore))
             .catch(_handleError(appStore))
-    },
+    }
     
-    handleCityNameChange(e) {
+    , handleCityNameChange(e) {
         appStore.cityName = e.target.value
-    },
+    }
 
-    handleSubmit(e) {
+    , handleSubmit(e) {
         e.preventDefault()
         if (appStore.prevCityName !== appStore.cityName) {   
             appStore.hoveredType = ''        
             appStore.fetchWeather({city: appStore.cityName})            
         }        
-    },
+    }
 
-    handleLegendClick(e) {
+    , handleLegendClick(e) {
         e.preventDefault()
         const type = e.target.dataset.type   
         if (type === 'legend') return
         appStore.selectedType = type
+    }
+
+    , handleForecastClick(e) {
+        e.preventDefault()
+        e.stopPropagation()
+        const timestamp = e.currentTarget.id
+        appStore.selectedForecast = appStore.forecast.list
+            .find(forecast => forecast.dt == timestamp) || null
+        appStore.showForecastDetail = true
+        console.log(appStore.selectedForecast, appStore.showForecastDetail)
+    }
+
+    , handleForecastDetailsClose(e) {
+        e.preventDefault()
+        e.stopPropagation()
+        appStore.showForecastDetail = false
     }
 })
 
