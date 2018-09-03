@@ -1,6 +1,100 @@
-.forecast-item-details {}
-
-.close-forecast-item { 
-    cursor: pointer;
+.forecast-item-details {
+    font-size: 1.3em;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(256, 256, 256, .95);
+    z-index: 3;
 }
 
+.forecast-item-details-wrapper {
+    margin: auto;
+    display: table;
+    height: 100%;
+    width: 40%;
+}
+
+.forecast-item-details-content {
+    display: table-cell;
+    vertical-align: middle
+}
+
+.forecast-info.forecast-description,
+.forecast-info.forecast-time,
+.forecast-info.forecast-temp {
+    text-align: left;
+}
+
+.forecast-info {
+    margin-top: .5em;
+    text-align: left;
+    line-height: 1.35;
+}
+
+.forecast-info.forecast-time {
+    font: italic normal .8em/1.4em 'Montserrat', sans-serif;
+    opacity: .5;
+}
+
+.forecast-info.forecast-temp {
+    margin-top: .1em;
+    font-size: 6em;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    opacity: .5;
+}
+
+.forecast-info.label {
+    margin-top: 1em;
+    font-weight: bold;
+}
+
+.close-forecast-item {
+    cursor: pointer;
+    font-size: 1.3em;
+    position: absolute;
+    top: 4em;
+    /* right: 2em; */
+    opacity: .5;
+}
+
+.close-forecast-item:hover,
+.close-forecast-item:active {
+    opacity: 1;
+}
+
+/* 
+.forecast-info {
+    text-align: left;
+    margin-top: .5em;
+}
+
+.forecast-info.forecast-temp {
+    
+}
+
+.close-forecast-item {
+    cursor: pointer;
+    font-size: 1.3em;
+    position: absolute;
+    top: -.6em;
+    right: .5em;
+    opacity: .5;
+}
+
+.close-forecast-item:hover,
+.close-forecast-item:active {
+    opacity: 1;
+}
+
+.forecast-item-details .forecast-description {
+    overflow: visible
+}
+
+.forecast-item-details .forecast-description-short {
+    text-align: left;
+    font-weight: bold;
+    margin-right: .35em;
+
+} */

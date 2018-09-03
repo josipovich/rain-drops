@@ -11,6 +11,4 @@ const Loading = () => {
     )
 }
 
-
-
 export default view(Loading)

@@ -1,12 +1,12 @@
-.current-weather {
+.current-weather-info {
     float: right;
     width: 35em;
 }
 
 .city-name {
     text-transform: uppercase;
-    font-size: 2em;
-    font-family: 'Heebo', sans-serif;
+    font-size: 2.5em;
+    /* font-family: 'Heebo', sans-serif; */
     display: inline-block;
 }
 

@@ -6,7 +6,8 @@ import {statusOk} from '../lib/utils'
 const _handleResponse = (store) => {
     return (data) => {
         const responseOk = statusOk(data.map(d => d.cod)) 
-        if (responseOk) {
+        store.showForecastDetail = false
+        if (responseOk) {            
             data.forEach(data => {  
                 const type = data.list ? 'forecast' : 'current'
                 store[type] = data
@@ -69,12 +70,12 @@ const appStore = store({
         appStore.selectedType = type
     }
 
-    , handleForecastClick(e) {
+    , handleForecastItemClick(e) {
         e.preventDefault()
         e.stopPropagation()
         const timestamp = e.currentTarget.id
         appStore.selectedForecast = appStore.forecast.list
-            .find(forecast => forecast.dt == timestamp) || null
+            .find(forecast => `${forecast.dt}` === timestamp) || null
         appStore.showForecastDetail = true
         console.log(appStore.selectedForecast, appStore.showForecastDetail)
     }

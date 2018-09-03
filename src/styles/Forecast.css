@@ -1,5 +1,6 @@
 .forecast-weather {
     margin-top: 1em;
+    position: relative;
 }
 
 .forecast-items {
@@ -46,6 +47,7 @@
     border-left: 1em solid #009ec5;
 }
 
+
 .forecast-item.selected::after,
 .sundown::after,
 .night::after {
@@ -73,12 +75,16 @@
 }
 
 .forecast-description {
-    height: 2.5em;
-    overflow: hidden;
+    margin-top: .1em;
 }
 
 .forecast-temp {
-    font-size: 3.8em;
+    font-size: 4.5em;
+    text-shadow:
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff; 
 }
 
 .forecast-temp-unit {
@@ -116,6 +122,28 @@
 .rain {
     border: 1px solid #009ec5;
     background-color: #83e2fa;
+}
+
+
+.forecast-item.rain:hover {
+    box-shadow: inset 0 0 0 .2em #009ec5
+}
+
+.forecast-item.thunderstorm:hover,
+.forecast-item.drizzle:hover {
+    box-shadow: inset 0 0 0 .2em #00708b
+}
+.forecast-item.clear:hover {
+    box-shadow: inset 0 0 0 .2em #c5a100
+}
+.forecast-item.clouds:hover {
+    box-shadow: inset 0 0 0 .2em #adadad
+}
+.forecast-item.snow:hover,
+.forecast-item.snow:hover,
+.forecast-item.snow:hover,
+.forecast-item.snow:hover {
+    box-shadow: inset 0 0 0 .2em #ccc
 }
 
 .forecast-legend {

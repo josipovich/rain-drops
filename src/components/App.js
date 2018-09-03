@@ -19,17 +19,16 @@ const App = () => {
                     handleChange={appStore.handleCityNameChange}
                 />
                 { showResults ? 
-                    <Results 
-                        // CityMap
-                        cityName={appStore.current.name} 
-                        location={[
-                            appStore.current.coord ? appStore.current.coord.lat : 0, 
-                            appStore.current.coord ? appStore.current.coord.lon : 0
-                        ]}
+                    <Results      
                         // Results
                         statuses={[`${appStore.current.cod}`, `${appStore.forecast.cod}`]}
                         // Current
                         current={appStore.current}
+                        cityName={appStore.current.name} 
+                        location={[
+                            appStore.current.coord ? appStore.current.coord.lat : 0, 
+                            appStore.current.coord ? appStore.current.coord.lon : 0
+                        ]}                        
                         // Forecast
                         forecast={appStore.forecast}                   
                         sunrise={appStore.current.sys ? appStore.current.sys.sunrise : 0}
@@ -38,8 +37,9 @@ const App = () => {
                         selectedType={appStore.selectedType}
                         selectedForecast={appStore.selectedForecast}
                         handleLegendClick={appStore.handleLegendClick}
+                        handleForecastItemClick={appStore.handleForecastItemClick}
+                        handleForecastDetailsClose={appStore.handleForecastDetailsClose}
                         showForecastDetail={appStore.showForecastDetail}
-                        selectedForecast={appStore.selectedForecast}
                         // Warning
                         message={appStore.current.message} 
                     /> : '' }

@@ -5,7 +5,6 @@ import {statusOk} from './../lib/utils'
 import Current from './Current'
 import Forecast from './Forecast'
 import Warning from './Warning'
-import CityMap from './CityMap'
 import './../styles/Results.css'
 
 
@@ -14,11 +13,11 @@ const Results = props => {
         ? (
             <div className="results">
                 <div className="results-top-row">
-                    <CityMap 
+                    <Current 
+                        current={props.current}
                         cityName={props.cityName} 
-                        location={props.location} 
+                        location={props.location}  
                     />
-                    <Current current={props.current} />
                 </div>
                 <Forecast
                     forecast={props.forecast} 
@@ -26,10 +25,11 @@ const Results = props => {
                     sunset={props.sunset}
                     weatherTypeList={props.weatherTypeList}
                     selectedType={props.selectedType}
-                    selectedForecast={props.selectedForecast}
                     showForecastDetail={props.showForecastDetail}
                     selectedForecast={props.selectedForecast}
-                    handleClick={props.handleLegendClick}
+                    handleLegendClick={props.handleLegendClick}
+                    handleForecastItemClick={props.handleForecastItemClick}
+                    handleForecastDetailsClose={props.handleForecastDetailsClose}
                 />        
             </div>
             )
@@ -37,17 +37,21 @@ const Results = props => {
 }
 
 Results.propTypes = {
-      statuses:          PropTypes.array.isRequired
-    , cityName:          PropTypes.string
-    , location:          PropTypes.array
-    , current:           PropTypes.any.isRequired
-    , forecast:          PropTypes.any.isRequired
-    , sunrise:           PropTypes.number.isRequired
-    , sunset:            PropTypes.number.isRequired
-    , weatherTypeList:   PropTypes.array.isRequired
-    , selectedType:      PropTypes.string.isRequired
-    , message:           PropTypes.string
+      statuses: PropTypes.array.isRequired
+    , cityName: PropTypes.string
+    , location: PropTypes.array
+    , current: PropTypes.any.isRequired
+    , forecast: PropTypes.any.isRequired
+    , sunrise: PropTypes.number.isRequired
+    , sunset: PropTypes.number.isRequired
+    , weatherTypeList: PropTypes.array.isRequired
+    , selectedType: PropTypes.string.isRequired
+    , message: PropTypes.string
+    , handleForecastItemClick: PropTypes.func.isRequired
+    , showForecastDetail: PropTypes.bool.isRequired
+    , selectedForecast: PropTypes.any
     , handleLegendClick: PropTypes.func.isRequired
+    , handleForecastDetailsClose: PropTypes.func.isRequired
 }
 
 export default view(Results)

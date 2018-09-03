@@ -1,35 +1,30 @@
 import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import appStore from './../stores/appStore'
 import {capitalize} from './../lib/utils'
 import {view} from 'react-easy-state'
 
 
-
-
-const ForecastItem = ({forecast}) => {
+const ForecastItem = ({forecast, handleForecastItemClick}) => {
     const timeFormatted = `${moment(forecast.dt*1000).format('HH:mm')}h`
     const temp = `${forecast.main.temp.toFixed(0)}`
-    const descShort = `${capitalize(forecast.weather[0].main)}:`
-    const descLong = capitalize(forecast.weather[0].description)
+    const descShort = `${capitalize(forecast.weather[0].main)}`
     const weatherClass = forecast.weatherClass
-    // const night = forecast.daylight ? '' : 'night'
-    const night = forecast.daylight ? '' : ''
     const selected = forecast.selected ? 'selected' : ''
 
     return (
         <div 
             id={forecast.dt}
-            className={`forecast-item ${weatherClass} ${night} ${selected}`}
-            onClick={appStore.handleForecastClick}
-        >
+            className={`forecast-item ${weatherClass} ${selected}`}
+            onClick={handleForecastItemClick}>
             <div>
                 <div className="forecast-time">{timeFormatted}</div>
-                <div className="forecast-temp">{temp}<span className="forecast-temp-unit">°C</span></div>
+                <div className="forecast-temp">
+                    {temp}
+                    <span className="forecast-temp-unit">°C</span>
+                </div>
                 <div className="forecast-description">
                     {descShort}
-                    <br />{descLong}
                 </div>
             </div>
         </div>
@@ -38,6 +33,7 @@ const ForecastItem = ({forecast}) => {
 
 ForecastItem.propTypes = {
     forecast: PropTypes.any.isRequired
+    , handleForecastItemClick: PropTypes.func.isRequired
 }
 
 export default view(ForecastItem)
