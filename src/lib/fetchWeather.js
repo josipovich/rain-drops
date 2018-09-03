@@ -1,5 +1,5 @@
 export default function ({city, metric = true}) {
-    let base = 'http://api.openweathermap.org/data/2.5/'
+    let base = 'https://api.openweathermap.org/data/2.5/'
         , weather = 'weather?q='
         , forecast = 'forecast?q='
         , api = `${process.env.REACT_APP_OPENWEATHER_KEY}`

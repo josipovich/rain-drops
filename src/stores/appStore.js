@@ -77,7 +77,6 @@ const appStore = store({
         appStore.selectedForecast = appStore.forecast.list
             .find(forecast => `${forecast.dt}` === timestamp) || null
         appStore.showForecastDetail = true
-        console.log(appStore.selectedForecast, appStore.showForecastDetail)
     }
 
     , handleForecastDetailsClose(e) {

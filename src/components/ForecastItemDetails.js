@@ -16,7 +16,7 @@ const ForecastItemDetails = ({selectedForecast, handleForecastDetailsClose}) => 
     const description = `${capitalize(f.weather[0].description)}`
     const pressure = `${f.main.pressure} hPa`
     const humidity = `${f.main.humidity}%`
-    const rain = f.rain['3h'] 
+    const rain = f.rain && f.rain['3h'] 
         ? f.rain['3h'].toFixed(2) + ' mm of rain (in 3h)' 
         : 'Unknown amout of rain'
 
