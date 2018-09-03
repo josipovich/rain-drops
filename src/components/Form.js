@@ -1,23 +1,10 @@
 import React from 'react'
-import appStore from './../stores/appStore'
-import './../styles/Form.css'
+import PropTypes from 'prop-types'
 import { view } from 'react-easy-state'
+import './../styles/Form.css'
 
 
-const Form = () => {
-    const handleChange = (e) => {
-        appStore.cityName = e.target.value
-    }
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-
-        if (appStore.prevCityName !== appStore.cityName) {   
-            appStore.hoveredType = ''        
-            appStore.fetchWeather({city: appStore.cityName})            
-        }        
-    }
-
+const Form = ({handleChange, handleSubmit}) => {
     return (
         <form className='search-form' onSubmit={handleSubmit}>
             <input
@@ -33,6 +20,11 @@ const Form = () => {
             />
         </form>
     )
+}
+
+Form.propTypes = {
+      handleChange: PropTypes.func.isRequired
+    , handleSubmit: PropTypes.func.isRequired
 }
 
 export default view(Form)

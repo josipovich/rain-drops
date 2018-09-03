@@ -14,7 +14,10 @@ const App = () => {
     return (
         <div className="App">
             <React.StrictMode>
-                <Form />
+                <Form 
+                    handleSubmit={appStore.handleSubmit}
+                    handleChange={appStore.handleCityNameChange}
+                />
                 { showResults ? <Results 
                         cityName={appStore.current.name} 
                         location={[

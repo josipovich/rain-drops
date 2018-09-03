@@ -43,12 +43,24 @@ const appStore = store({
     weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm'],
     selectedType: '',
 
-    fetchWeather (city) {
+    fetchWeather(city) {
         appStore.currentInProgress = appStore.forecastInProgress = true
 
         Promise.all(fetchWeather(city)) // returns two promises
             .then(_handleResponse(appStore))
             .catch(_handleError(appStore))
+    },
+    
+    handleCityNameChange(e) {
+        appStore.cityName = e.target.value
+    },
+
+    handleSubmit(e) {
+        e.preventDefault()
+        if (appStore.prevCityName !== appStore.cityName) {   
+            appStore.hoveredType = ''        
+            appStore.fetchWeather({city: appStore.cityName})            
+        }        
     }
 })
 
