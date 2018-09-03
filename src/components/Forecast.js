@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import PropTypes from 'prop-types'
 import _ from 'lodash'
 import {view} from 'react-easy-state'
 import {weatherCodeToWeatherClass, isDaylight} from './../lib/utils'
@@ -45,18 +46,26 @@ const _groupedForecastsToComponents = groupedForecast => {
     })
 }
 
-export default view(
-    ({forecast, sunrise, sunset, weatherTypeList, selectedType}) => {
-        const groupedForecasts = _groupForecastListByDay(forecast, sunrise, sunset, selectedType)
-        const forecastItems = _groupedForecastsToComponents(groupedForecasts)
-    
-        return (
-            <div className="forecast-weather">
-                <ForecastLegend weatherTypeList={weatherTypeList}/>
-                <div className="forecast-items">
-                    {forecastItems}
-                </div>
+const Forecst = ({forecast, sunrise, sunset, weatherTypeList, selectedType}) => {
+    const groupedForecasts = _groupForecastListByDay(forecast, sunrise, sunset, selectedType)
+    const forecastItems = _groupedForecastsToComponents(groupedForecasts)
+
+    return (
+        <div className="forecast-weather">
+            <ForecastLegend weatherTypeList={weatherTypeList}/>
+            <div className="forecast-items">
+                {forecastItems}
             </div>
-        )
-    }
-)
+        </div>
+    )
+}
+
+Forecst.propTypes = {
+      forecast: PropTypes.any.isRequired
+    , sunrise: PropTypes.number.isRequired
+    , sunset: PropTypes.number.isRequired
+    , weatherTypeList: PropTypes.array.isRequired
+    , selectedType: PropTypes.string.isRequired
+}
+
+export default view(Forecst)

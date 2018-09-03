@@ -1,5 +1,5 @@
 import React from 'react'
-import appStore from './../stores/appStore'
+import PropTypes from 'prop-types'
 import {view} from 'react-easy-state'
 import {statusOk} from './../lib/utils'
 import Current from './Current'
@@ -8,8 +8,6 @@ import Warning from './Warning'
 import CityMap from './CityMap'
 import './../styles/Results.css'
 
-
-// export default view(
 
 const Results = (props) => {    
     return statusOk(props.cods)  
@@ -34,4 +32,16 @@ const Results = (props) => {
         : <Warning message={props.message} />
 }
 
-export default Results
+Results.propTypes = {
+    cityName: PropTypes.string,
+    location: PropTypes.array,
+    current: PropTypes.any.isRequired,
+    forecast: PropTypes.any.isRequired,
+    sunrise: PropTypes.number.isRequired,
+    sunset: PropTypes.number.isRequired,
+    weatherTypeList: PropTypes.array.isRequired,
+    selectedType: PropTypes.string.isRequired,
+    message: PropTypes.string
+}
+
+export default view(Results)

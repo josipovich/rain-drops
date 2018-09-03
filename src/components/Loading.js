@@ -3,10 +3,12 @@ import logo from './../loading-animation.svg'
 import { view } from 'react-easy-state'
 
 
-export default view(({visible}) => {
+const Loading = ({visible}) => {
     return (
         <div className="loading">
             <img src={logo} className="loading-animation" alt="logo" />
         </div>
     )
-})
+}
+
+export default view(Loading)

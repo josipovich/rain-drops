@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import L from 'leaflet'
 import {view} from 'react-easy-state'
 
@@ -38,5 +39,10 @@ class CityMap extends Component {
         return <div id="city-map"></div>
     }
 }   
+
+CityMap.propTypes = {
+      cityName: PropTypes.string.isRequired
+    , location: PropTypes.array.isRequired
+}
 
 export default view(CityMap)
