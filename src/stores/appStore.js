@@ -13,7 +13,7 @@ const _handleResponse = (store) => {
                 store[type] = data
                 store[`${type}InProgress`] = false                   
             })            
-            store.selectedType = ''
+            store.selectedLegendType = ''
         } else {
             // data[0] b/c we don't care about mapping since both are the same in this case
             store.forecast = store.current = data[0]
@@ -38,8 +38,8 @@ const appStore = store({
     , current: null
     , currentInProgress: false
     , forecastInProgress: false
-    , weatherTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm']
-    , selectedType: ''
+    , legendTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm']
+    , selectedLegendType: ''
     , selectedForecast: null
     , showForecastDetail: false
 
@@ -67,7 +67,7 @@ const appStore = store({
         e.preventDefault()
         const type = e.target.dataset.type   
         if (type === 'legend') return
-        appStore.selectedType = type
+        appStore.selectedLegendType = type
     }
 
     , handleForecastItemClick(e) {

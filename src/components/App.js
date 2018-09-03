@@ -2,47 +2,46 @@ import React from 'react'
 import {view} from 'react-easy-state'
 import appStore from './../stores/appStore'
 import Loading from './Loading'
+import ForecastWeather from './ForecastWeather' 
+import CurrentWeather from './CurrentWeather' 
 import Form from './Form'
 import Results from './Results'
 import './../styles/App.css'
 
 
 const App = () => {
-    const isLoading = appStore.forecastInProgress || appStore.currentInProgress
-    const showResults = appStore.current && appStore.forecast
+    const as = appStore
+    const isLoading = as.forecastInProgress || as.currentInProgress
+    const showResults = as.current && as.forecast
 
     return (
         <div className="App">
             <React.StrictMode>
                 <Form 
-                    handleSubmit={appStore.handleSubmit}
-                    handleChange={appStore.handleCityNameChange}
-                />
-                { showResults ? 
-                    <Results      
-                        // Results
-                        statuses={[`${appStore.current.cod}`, `${appStore.forecast.cod}`]}
-                        // Current
-                        current={appStore.current}
-                        cityName={appStore.current.name} 
-                        location={[
-                            appStore.current.coord ? appStore.current.coord.lat : 0, 
-                            appStore.current.coord ? appStore.current.coord.lon : 0
-                        ]}                        
-                        // Forecast
-                        forecast={appStore.forecast}                   
-                        sunrise={appStore.current.sys ? appStore.current.sys.sunrise : 0}
-                        sunset={appStore.current.sys ? appStore.current.sys.sunset : 0}
-                        weatherTypeList={appStore.weatherTypeList}                        
-                        selectedType={appStore.selectedType}
-                        selectedForecast={appStore.selectedForecast}
-                        handleLegendClick={appStore.handleLegendClick}
-                        handleForecastItemClick={appStore.handleForecastItemClick}
-                        handleForecastDetailsClose={appStore.handleForecastDetailsClose}
-                        showForecastDetail={appStore.showForecastDetail}
-                        // Warning
-                        message={appStore.current.message} 
-                    /> : '' }
+                    handleSubmit={as.handleSubmit}
+                    handleChange={as.handleCityNameChange} />                    
+                { showResults 
+                    ? <Results      
+                        statuses={[`${as.current.cod}`, `${as.forecast.cod}`]}
+                        message={as.current.message} >
+                        <CurrentWeather 
+                            current={as.current}
+                            cityName={as.current.name} 
+                            location={[
+                                as.current.coord ? as.current.coord.lat : 0, 
+                                as.current.coord ? as.current.coord.lon : 0
+                            ]} />
+                        <ForecastWeather
+                            forecast={as.forecast}                   
+                            legendTypeList={as.legendTypeList}                        
+                            selectedLegendType={as.selectedLegendType}
+                            selectedForecast={as.selectedForecast}
+                            handleLegendClick={as.handleLegendClick}
+                            handleForecastItemClick={as.handleForecastItemClick}
+                            handleForecastDetailsClose={as.handleForecastDetailsClose}
+                            showForecastDetail={as.showForecastDetail} />   
+                    </Results> : '' 
+                }
                 { isLoading ? <Loading /> : '' }
             </React.StrictMode>
         </div>

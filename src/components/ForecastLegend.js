@@ -4,9 +4,9 @@ import {view} from 'react-easy-state'
 import ForecastLegendCell from './ForecastLegendCell'
 
 
-const ForecastLegend = ({weatherTypeList, handleLegendClick}) => {
-    // const types = ['legend', 'sundown', ...weatherTypeList]
-    const types = ['legend', ...weatherTypeList]    
+const ForecastLegend = ({legendTypeList, handleLegendClick}) => {
+    // const types = ['legend', 'sundown', ...legendTypeList]
+    const types = ['legend', ...legendTypeList]    
     const LegendCells = types.map((type, i) => (
         <ForecastLegendCell 
             handleLegendClick={handleLegendClick}
@@ -23,7 +23,7 @@ const ForecastLegend = ({weatherTypeList, handleLegendClick}) => {
 }
 
 ForecastLegend.propTypes = {
-      weatherTypeList: PropTypes.array.isRequired
+      legendTypeList: PropTypes.array.isRequired
     , handleLegendClick: PropTypes.func.isRequired
 }
 

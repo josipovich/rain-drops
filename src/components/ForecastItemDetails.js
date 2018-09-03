@@ -18,7 +18,7 @@ const ForecastItemDetails = ({selectedForecast, handleForecastDetailsClose}) => 
     const humidity = `${f.main.humidity}%`
     const rain = f.rain && f.rain['3h'] 
         ? f.rain['3h'].toFixed(2) + ' mm of rain (in 3h)' 
-        : 'Unknown amout of rain'
+        : 'No rain (in 3h)'
 
     return (
         <div 

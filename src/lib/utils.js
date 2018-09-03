@@ -49,7 +49,7 @@ const statusOk = codsArr => {
  * @param   {String|Number} code weather code
  * @returns {String}      
  */
-const weatherCodeToWeatherClass = code => {
+const weatherCodeToWeather = code => {
     code += '' 
     // 
     if (code[0] === '2') return 'thunderstorm' // thunderstorm
@@ -110,7 +110,7 @@ const isDaylight = (time, sunrise, sunset) => {
 
 export {
       angleToDirection
-    , weatherCodeToWeatherClass
+    , weatherCodeToWeather
     , statusOk
     , capitalize
     , unixToHours

@@ -53,14 +53,14 @@
 .night::after {
     content: "";
     background: url("/night-bg.png");
-    opacity: 0.4;
+    opacity: 0.25;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     position: absolute;
     z-index: 2; 
-    box-shadow: inset 0 0 1em #444444;
+    /* box-shadow: inset 0 0 1em #444444; */
 }
 
 .forecast-time,
