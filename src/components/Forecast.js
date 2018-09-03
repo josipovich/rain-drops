@@ -46,7 +46,7 @@ const _groupedForecastsToComponents = (groupedForecast, handleClick) => {
 }
 
 const Forecast = props => {
-    const groupedForecasts = _groupForecastListByDay(props.forecast, props.sunrise, props.sunset, props.selectedType)
+    const groupedForecasts = _groupForecastListByDay(props.forecast, props.selectedType)
     const forecastItems = _groupedForecastsToComponents(groupedForecasts, props.handleForecastItemClick)
 
     return (
