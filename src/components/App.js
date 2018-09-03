@@ -18,19 +18,26 @@ const App = () => {
                     handleSubmit={appStore.handleSubmit}
                     handleChange={appStore.handleCityNameChange}
                 />
-                { showResults ? <Results 
+                { showResults ? 
+                    <Results 
+                        // CityMap
                         cityName={appStore.current.name} 
                         location={[
                             appStore.current.coord ? appStore.current.coord.lat : 0, 
                             appStore.current.coord ? appStore.current.coord.lon : 0
                         ]}
-                        cods={[`${appStore.current.cod}`, `${appStore.forecast.cod}`]}
+                        // Results
+                        statuses={[`${appStore.current.cod}`, `${appStore.forecast.cod}`]}
+                        // Current
                         current={appStore.current}
-                        forecast={appStore.forecast} 
+                        // Forecast
+                        forecast={appStore.forecast}                         
                         sunrise={appStore.current.sys ? appStore.current.sys.sunrise : 0}
                         sunset={appStore.current.sys ? appStore.current.sys.sunset : 0}
-                        weatherTypeList={appStore.weatherTypeList}
+                        weatherTypeList={appStore.weatherTypeList}                        
                         selectedType={appStore.selectedType}
+                        handleLegendClick={appStore.handleLegendClick}
+                        // Warning
                         message={appStore.current.message} 
                     /> : '' }
                 { isLoading ? <Loading /> : '' }

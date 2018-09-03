@@ -4,18 +4,11 @@ import appStore from './../stores/appStore'
 import {view} from 'react-easy-state'
 
 
-const ForecastLegendCell = ({type}) => {
-    const _handleClick = (e) => {
-        e.preventDefault()
-        const type = e.target.dataset.type   
-        if (type === 'legend') return
-        appStore.selectedType = type
-    }
-    
+const ForecastLegendCell = ({type, handleClick}) => {    
     return (
         <div 
             data-type={type}
-            onClick={_handleClick} 
+            onClick={handleClick} 
             className={`legend-cell ${type}`}
         >
             {type}
@@ -24,7 +17,8 @@ const ForecastLegendCell = ({type}) => {
 }
 
 ForecastLegendCell.propTypes = {
-    type: PropTypes.string.isRequired
+      type:        PropTypes.string.isRequired
+    , handleClick: PropTypes.func.isRequired
 }
 
 export default view(ForecastLegendCell)

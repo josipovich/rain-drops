@@ -9,8 +9,8 @@ import CityMap from './CityMap'
 import './../styles/Results.css'
 
 
-const Results = (props) => {    
-    return statusOk(props.cods)  
+const Results = props => {    
+    return statusOk(props.statuses)  
         ? (
             <div className="results">
                 <div className="results-top-row">
@@ -26,6 +26,7 @@ const Results = (props) => {
                     sunset={props.sunset}
                     weatherTypeList={props.weatherTypeList}
                     selectedType={props.selectedType}
+                    handleClick={props.handleLegendClick}
                 />        
             </div>
             )
@@ -33,15 +34,17 @@ const Results = (props) => {
 }
 
 Results.propTypes = {
-    cityName: PropTypes.string,
-    location: PropTypes.array,
-    current: PropTypes.any.isRequired,
-    forecast: PropTypes.any.isRequired,
-    sunrise: PropTypes.number.isRequired,
-    sunset: PropTypes.number.isRequired,
-    weatherTypeList: PropTypes.array.isRequired,
-    selectedType: PropTypes.string.isRequired,
-    message: PropTypes.string
+      statuses:          PropTypes.array.isRequired
+    , cityName:          PropTypes.string
+    , location:          PropTypes.array
+    , current:           PropTypes.any.isRequired
+    , forecast:          PropTypes.any.isRequired
+    , sunrise:           PropTypes.number.isRequired
+    , sunset:            PropTypes.number.isRequired
+    , weatherTypeList:   PropTypes.array.isRequired
+    , selectedType:      PropTypes.string.isRequired
+    , message:           PropTypes.string
+    , handleLegendClick: PropTypes.func.isRequired
 }
 
 export default view(Results)

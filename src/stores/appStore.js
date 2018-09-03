@@ -11,17 +11,15 @@ const _handleResponse = (store) => {
                 const type = data.list ? 'forecast' : 'current'
                 store[type] = data
                 store[`${type}InProgress`] = false                   
-            })
-            store.prevCityName = store.cityName
+            })            
             store.selectedType = ''
         } else {
             // data[0] b/c we don't care about mapping since both are the same in this case
             store.forecast = store.current = data[0]
             store.currentInProgress = store.forecastInProgress = false        
         }
-
-        console.log('current', store.current)
-        console.log('forecast', store.forecast)
+        // console.log('current', store.current)
+        // console.log('forecast', store.forecast)
     }
 }
 
@@ -35,7 +33,6 @@ const _handleError = (store) => {
 
 const appStore = store({ 
     cityName: '',
-    prevCityName: '',
     forecast: null,
     current: null,
     currentInProgress: false,
@@ -61,6 +58,13 @@ const appStore = store({
             appStore.hoveredType = ''        
             appStore.fetchWeather({city: appStore.cityName})            
         }        
+    },
+
+    handleLegendClick(e) {
+        e.preventDefault()
+        const type = e.target.dataset.type   
+        if (type === 'legend') return
+        appStore.selectedType = type
     }
 })
 
