@@ -58,16 +58,8 @@ const appStore = store({
     , handleSubmit(e) {
         e.preventDefault()
         if (appStore.prevCityName !== appStore.cityName) {   
-            appStore.hoveredType = ''        
             appStore.fetchWeather({city: appStore.cityName})            
         }        
-    }
-
-    , handleLegendClick(e) {
-        e.preventDefault()
-        const type = e.target.dataset.type   
-        if (type === 'legend') return
-        appStore.selectedLegendType = type
     }
 
     , handleForecastItemClick(e) {

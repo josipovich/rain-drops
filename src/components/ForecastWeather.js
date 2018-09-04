@@ -11,7 +11,7 @@ const ForecastWeather = props => (
     <div className="forecast-weather">
         <h1>Weather Forecast</h1>
         <ForecastLegend             
-            handleLegendClick={props.handleLegendClick}
+            selectedLegendType={props.selectedLegendType}
             legendTypeList={props.legendTypeList} />
         <ForecastItems
             forecast={props.forecast}
@@ -27,7 +27,6 @@ const ForecastWeather = props => (
 
 ForecastWeather.propTypes = {
       forecast: PropTypes.any.isRequired
-    , handleLegendClick: PropTypes.func.isRequired
     , legendTypeList: PropTypes.array.isRequired
     , selectedLegendType: PropTypes.string.isRequired
     , handleForecastItemClick: PropTypes.func.isRequired
