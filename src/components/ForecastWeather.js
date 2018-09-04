@@ -15,8 +15,7 @@ const ForecastWeather = props => (
             legendTypeList={props.legendTypeList} />
         <ForecastItems
             forecast={props.forecast}
-            selectedLegendType={props.selectedLegendType}
-            handleForecastItemClick={props.handleForecastItemClick} />
+            selectedLegendType={props.selectedLegendType} />
         {props.showForecastDetail 
             ? <ForecastItemDetails selectedForecast={props.selectedForecast} />
             : ''}
@@ -27,7 +26,6 @@ ForecastWeather.propTypes = {
       forecast: PropTypes.any.isRequired
     , legendTypeList: PropTypes.array.isRequired
     , selectedLegendType: PropTypes.string.isRequired
-    , handleForecastItemClick: PropTypes.func.isRequired
     , selectedForecast: PropTypes.any
 }
 

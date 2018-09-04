@@ -17,9 +17,7 @@ const App = () => {
     return (
         <div className="App">
             <React.StrictMode>
-                <Form 
-                    handleSubmit={as.handleSubmit}
-                    handleChange={as.handleCityNameChange} />                    
+                <Form fetchData={as.fetchWeather} />                    
                 { showResults 
                     ? <Results      
                         statuses={[`${as.current.cod}`, `${as.forecast.cod}`]}
@@ -36,7 +34,6 @@ const App = () => {
                             legendTypeList={as.legendTypeList}                        
                             selectedLegendType={as.selectedLegendType}
                             selectedForecast={as.selectedForecast}
-                            handleForecastItemClick={as.handleForecastItemClick}
                             showForecastDetail={as.showForecastDetail} />   
                     </Results> : '' 
                 }

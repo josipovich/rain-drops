@@ -19,8 +19,8 @@ const _handleResponse = (store) => {
             store.forecast = store.current = data[0]
             store.currentInProgress = store.forecastInProgress = false        
         }
-        console.log('current', store.current)
-        console.log('forecast', store.forecast)
+        // console.log('current', store.current)
+        // console.log('forecast', store.forecast)
     }
 }
 
@@ -49,27 +49,7 @@ const appStore = store({
         Promise.all(fetchWeather(city)) // returns two promises
             .then(_handleResponse(appStore))
             .catch(_handleError(appStore))
-    }
-    
-    , handleCityNameChange(e) {
-        appStore.cityName = e.target.value
-    }
-
-    , handleSubmit(e) {
-        e.preventDefault()
-        if (appStore.prevCityName !== appStore.cityName) {   
-            appStore.fetchWeather({city: appStore.cityName})            
-        }        
-    }
-
-    , handleForecastItemClick(e) {
-        e.preventDefault()
-        e.stopPropagation()
-        const timestamp = e.currentTarget.id
-        appStore.selectedForecast = appStore.forecast.list
-            .find(forecast => `${forecast.dt}` === timestamp) || null
-        appStore.showForecastDetail = true
-    }
+    }   
 })
 
 export default appStore

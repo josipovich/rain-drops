@@ -24,7 +24,7 @@ const _groupForecastListByDay = (forecast, selectedLegendType) => {
         .value()
 } 
 
-const _groupedForecastsToComponents = (groupedForecast, handleClick) => {   
+const _groupedForecastsToComponents = (groupedForecast) => {   
     return groupedForecast.map((dayGroup, i) => {
         // change first day str to today 
         const dayName = i === 0 
@@ -35,7 +35,6 @@ const _groupedForecastsToComponents = (groupedForecast, handleClick) => {
                 return (
                     <ForecastItem             
                         key={i} 
-                        handleForecastItemClick={handleClick} 
                         forecast={data} />
                 )
             })
@@ -48,15 +47,11 @@ const _groupedForecastsToComponents = (groupedForecast, handleClick) => {
     })
 }
 
-const ForecastItems = ({
-        forecast, 
-        selectedLegendType, 
-        handleForecastItemClick}) => {
-
+const ForecastItems = ({forecast, selectedLegendType}) => {
     const groupedForecasts = 
         _groupForecastListByDay(forecast, selectedLegendType)
     const forecastItems = 
-        _groupedForecastsToComponents(groupedForecasts, handleForecastItemClick)
+        _groupedForecastsToComponents(groupedForecasts)
 
     return (
         <div className="forecast-items">
@@ -68,7 +63,6 @@ const ForecastItems = ({
 ForecastItems.propTypes = {
       forecast: PropTypes.any.isRequired
     , selectedLegendType: PropTypes.string.isRequired
-    , handleForecastItemClick: PropTypes.func.isRequired
 }
 
 export default view(ForecastItems)

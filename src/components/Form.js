@@ -1,17 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { view } from 'react-easy-state'
+import appStore from './../stores/appStore'
 import './../styles/Form.css'
 
 
-const Form = ({handleChange, handleSubmit}) => {
+const Form = ({fetchData}) => {
+    const updateCityName = (e) => {
+        appStore.cityName = e.target.value
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (appStore.prevCityName !== appStore.cityName) {   
+            fetchData({city: appStore.cityName})            
+        }        
+    }
+
     return (
         <form className='search-form' onSubmit={handleSubmit}>
             <input
                 className='search-form-input'
                 placeholder="Type in city name (eg 'London, US' or just 'london')..."
                 type="text"
-                onChange={handleChange}
+                onChange={updateCityName}
             />
             <input 
                 className='search-form-button'
@@ -23,8 +35,7 @@ const Form = ({handleChange, handleSubmit}) => {
 }
 
 Form.propTypes = {
-      handleChange: PropTypes.func.isRequired
-    , handleSubmit: PropTypes.func.isRequired
+    fetchData: PropTypes.func.isRequired
 }
 
 export default view(Form)
