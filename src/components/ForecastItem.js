@@ -6,24 +6,22 @@ import {capitalize} from './../lib/utils'
 import {view} from 'react-easy-state'
 
 
-const ForecastItem = ({forecast}) => {
-    const timeFormatted = `${moment(forecast.dt*1000).format('HH:mm')}h`
-    const temp = `${forecast.main.temp.toFixed(0)}`
-    const descShort = `${capitalize(forecast.weather[0].main)}`
-    const weatherClass = forecast.weatherClass
-    const selected = forecast.selected ? 'selected' : ''
+const ForecastItem = ({data}) => {
+    const {dt, main, weather, weatherClass, selected} = data
+    const timeFormatted = `${moment(dt*1000).format('HH:mm')}h`
+    const temp = `${main.temp.toFixed(0)}`
+    const descShort = `${capitalize(weather[0].main)}`
+    const isSelected = selected ? 'selected' : ''
     const openForecastItem = (e) => {
         e.preventDefault()
         const timestamp = e.currentTarget.id
-        appStore.selectedForecast = appStore.forecast.list
-            .find(forecast => `${forecast.dt}` === timestamp) || null
-        appStore.showForecastDetail = true
+        appStore.setSelectedForecast(timestamp, appStore)
     }
 
     return (
         <div 
-            id={forecast.dt}
-            className={`forecast-item ${weatherClass} ${selected}`}
+            id={data.dt}
+            className={`forecast-item ${weatherClass} ${isSelected}`}
             onClick={openForecastItem}>
             <div>
                 <div className="forecast-time">{timeFormatted}</div>
@@ -40,7 +38,7 @@ const ForecastItem = ({forecast}) => {
 }
 
 ForecastItem.propTypes = {
-    forecast: PropTypes.shape({
+    data: PropTypes.shape({
           dt: PropTypes.number.isRequired
         , main: PropTypes.any.isRequired
         , weather: PropTypes.array.isRequired

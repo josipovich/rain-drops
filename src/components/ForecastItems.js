@@ -7,8 +7,8 @@ import {weatherCodeToWeather} from './../lib/utils'
 import ForecastItem from './ForecastItem'
 
 
-const _groupForecastListByDay = (forecast, selectedLegendType) => {
-    // used lodash b/c of groupBy
+const _groupDataByName = (forecast, selectedLegendType) => {
+    // used lodash b/c of groupBy, lazy :)
     return _.chain(forecast.list)
         // extend data so we can easier group forecasts
         // and also use that info for styling
@@ -20,22 +20,22 @@ const _groupForecastListByDay = (forecast, selectedLegendType) => {
         })
         .groupBy('day')
         // to improve grouping
-        .map((forecast, day) => ({forecast, day}))
+        .map((data, day) => ({data, day}))
         .value()
 } 
 
-const _groupedForecastsToComponents = (groupedForecast) => {   
+const _groupedDataToComponents = (groupedForecast) => {   
     return groupedForecast.map((dayGroup, i) => {
         // change first day str to today 
         const dayName = i === 0 
             ? 'TODAY' 
             : dayGroup.day.substr(0, 3).toUpperCase()
-        const forecastsForThatDay = dayGroup.forecast
+        const forecastsForThatDay = dayGroup.data
             .map((data, i) => {
                 return (
                     <ForecastItem             
                         key={i} 
-                        forecast={data} />
+                        data={data} />
                 )
             })
         return (
@@ -47,11 +47,9 @@ const _groupedForecastsToComponents = (groupedForecast) => {
     })
 }
 
-const ForecastItems = ({forecast, selectedLegendType}) => {
-    const groupedForecasts = 
-        _groupForecastListByDay(forecast, selectedLegendType)
-    const forecastItems = 
-        _groupedForecastsToComponents(groupedForecasts)
+const ForecastItems = ({data, selectedLegendType}) => {
+    const groupedForecasts = _groupDataByName(data, selectedLegendType)
+    const forecastItems = _groupedDataToComponents(groupedForecasts)
 
     return (
         <div className="forecast-items">
@@ -61,7 +59,7 @@ const ForecastItems = ({forecast, selectedLegendType}) => {
 }
 
 ForecastItems.propTypes = {
-      forecast: PropTypes.any.isRequired
+      data: PropTypes.any.isRequired
     , selectedLegendType: PropTypes.string.isRequired
 }
 

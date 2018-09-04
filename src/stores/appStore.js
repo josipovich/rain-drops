@@ -34,8 +34,12 @@ const _handleError = (store) => {
 
 const appStore = store({ 
       cityName: ''
+    , appName: 'RAIN DROPS'
     , forecast: null
     , current: null
+    , currentWeatherHeaderText: 'Current Weather'
+    , forecastWeatherHeaderText: 'Forecast Weather'
+    , aboutHeaderText: 'About'
     , currentInProgress: false
     , forecastInProgress: false
     , legendTypeList: ['clear', 'clouds', 'snow', 'rain', 'thunderstorm']
@@ -43,13 +47,35 @@ const appStore = store({
     , selectedForecast: null
     , showForecastDetail: false
 
-    , fetchWeather(city) {
-        appStore.currentInProgress = appStore.forecastInProgress = true
+    , fetchWeather(store, city) {
+        store.currentInProgress = store.forecastInProgress = true
 
         Promise.all(fetchWeather(city)) // returns two promises
-            .then(_handleResponse(appStore))
-            .catch(_handleError(appStore))
+            .then(_handleResponse(store))
+            .catch(_handleError(store))
     }   
+
+    /**
+     * Sets value to the obj
+     * @param   {Number} fieldName 0-360 angle 
+     * @param   {Number} value 0-360 angle 
+     * @param   {Number} store 0-360 angle 
+     */
+    , setField(fieldName, value, store) {
+        store[fieldName] = value
+    }
+
+    , setSelectedForecast(timestamp, store) {        
+        const selectedForecast = store.forecast.list
+            // finds forecast with same timestamp
+            .find(data => `${data.dt}` === timestamp) || null           
+        store.selectedForecast = selectedForecast 
+        store.showForecastDetail = true
+    }
+
+    , setCityName(store, value) {
+        store.cityName = value
+    }
 })
 
 export default appStore

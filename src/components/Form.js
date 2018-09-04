@@ -1,19 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { view } from 'react-easy-state'
+import {view} from 'react-easy-state'
 import appStore from './../stores/appStore'
 import './../styles/Form.css'
 
 
-const Form = ({fetchData}) => {
+const Form = () => {
+    const {setField, prevCityName, cityName, fetchWeather} = appStore
+
     const updateCityName = (e) => {
-        appStore.cityName = e.target.value
+        setField('cityName', e.target.value, appStore)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (appStore.prevCityName !== appStore.cityName) {   
-            fetchData({city: appStore.cityName})            
+        if (prevCityName !== cityName && cityName) {   
+            fetchWeather(appStore, {city: cityName})            
         }        
     }
 
@@ -32,10 +33,6 @@ const Form = ({fetchData}) => {
             />
         </form>
     )
-}
-
-Form.propTypes = {
-    fetchData: PropTypes.func.isRequired
 }
 
 export default view(Form)

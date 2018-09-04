@@ -9,24 +9,25 @@ import './../styles/Forecast.css'
 
 const ForecastWeather = props => (
     <div className="forecast-weather">
-        <h1>Weather Forecast</h1>
+        <h1>{props.headerText}</h1>
         <ForecastLegend             
             selectedLegendType={props.selectedLegendType}
             legendTypeList={props.legendTypeList} />
         <ForecastItems
-            forecast={props.forecast}
+            data={props.data}
             selectedLegendType={props.selectedLegendType} />
         {props.showForecastDetail 
-            ? <ForecastItemDetails selectedForecast={props.selectedForecast} />
+            ? <ForecastItemDetails selectedData={props.selectedData} />
             : ''}
     </div>
 )
 
 ForecastWeather.propTypes = {
-      forecast: PropTypes.any.isRequired
+      data: PropTypes.any.isRequired
     , legendTypeList: PropTypes.array.isRequired
     , selectedLegendType: PropTypes.string.isRequired
-    , selectedForecast: PropTypes.any
+    , selectedData: PropTypes.any
+    , headerText: PropTypes.string.isRequired
 }
 
 export default view(ForecastWeather)

@@ -8,11 +8,13 @@ const ForecastLegend = ({legendTypeList, selectedLegendType}) => {
     const setSelectedLegendType = (e) => {
         e.preventDefault()
         const type = e.target.dataset.type   
-        if (type === 'legend') return
-        appStore.selectedLegendType = type
+        const prevType = appStore.selectedLegendType 
+        if (type !== 'legend') {
+            appStore.setField('selectedLegendType', prevType !== type ? type : '', appStore)          
+        }        
     }
-
     const types = ['legend', ...legendTypeList]  
+
     const LegendCells = types.map((type, i) => {
         const selected = selectedLegendType === type 
         return (
@@ -36,7 +38,7 @@ const ForecastLegend = ({legendTypeList, selectedLegendType}) => {
 
 ForecastLegend.propTypes = {
       legendTypeList: PropTypes.array.isRequired
-    , selectedLegendType: PropTypes.string
+    , selectedLegendType: PropTypes.string.isRequired
 }
 
 export default view(ForecastLegend)
