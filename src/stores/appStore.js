@@ -38,7 +38,7 @@ const appStore = store({
     , forecast: null
     , current: null
     , currentWeatherHeaderText: 'Current Weather'
-    , forecastWeatherHeaderText: 'Forecast Weather'
+    , forecastWeatherHeaderText: 'Forecast'
     , aboutHeaderText: 'About'
     , currentInProgress: false
     , forecastInProgress: false
