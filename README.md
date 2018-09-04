@@ -2,28 +2,27 @@
 
 *This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).*
 
-**Rain Drops** is React App that uses OpenWeatherMap weather API to show current weather and 5 day forecasts. For state management it 
-uses [React Easy State](https://github.com/solkimicreb/react-easy-state) and [leaflet](https://github.com/Leaflet/Leaflet) as a map.
+**Rain Drops** is React App that uses [OpenWeatherMap weather API](https://openweathermap.org/api) to show current weather and 5 day forecasts. For state management uses [React Easy State](https://github.com/solkimicreb/react-easy-state) and [leaflet](https://github.com/Leaflet/Leaflet) is used as a map.
 
 Live demo can be found [here](http://rain-drops.herokuapp.com/).
 
-![Rain Drops](https://i.imgur.com/3EPwiyu.png)
+![Rain Drops](http://i.imgur.com/HBPDr4Q.png)
 
 Results are split in two groups: **current** and **forecast**.
 
 ### Current
 
-descibes current weather measured in the last 30-60 minutes. Shows exact time of measurement and short weather description.
+Descibes current weather measured in the last 30-60 minutes. Shows exact time of measurement and short weather description.
 
 ### Forecast 
 
-Forecast is similar to a calendar, but with weather and on a day level. Shows basic weather info for several days in future.
+Forecast is similar to a calendar, but with weather and on a day level. Shows basic weather info for several days.
 
 For each day there are 8 potential forecasts (or less, depending on what time is it in the time of query). In total there are 40 forecasts and they are for 5 or 6 days.
 
 Clicking on a legend will highlight all forecasts measurements with that type of weather.
 
-Clicking on a forecast measurement will show additional weather information (humidity, pressure, rain, etc).
+Clicking on a forecast measurement will show additional weather information (weather type, humidity, pressure, rain and wind).
 
 
 ### Setup
