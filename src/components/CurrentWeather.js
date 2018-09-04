@@ -17,32 +17,35 @@ const CurrentWeather = ({current, cityName, location}) => {
     const timeFormatted = `Measured ${capitalize(time.fromNow())} (${time.format('HH:mm')}h)`
 
     return (
-        // <div className="results-top-row">
-            <div className="current-weather">
-                <h1>Current Weather</h1>
-                <CityMap 
-                    cityName={cityName} 
-                    location={location} 
-                />
-                <div className="current-weather-info">
-                    <div className="city-name">{city}</div>
-                    <div className="temperature">
-                        <span className="temperature-val">{temp}</span>
-                        <span className="temperature-unit">°C</span>
-                    </div>	
-                    <div className="description">{description} With {wind}</div>
-                    <div className="measurement-time">{timeFormatted}</div>
-                </div>
+        <div className="current-weather">
+            <h1>Current Weather</h1>
+            <CityMap 
+                cityName={cityName} 
+                location={location} 
+            />
+            <div className="current-weather-info">
+                <div className="city-name">{city}</div>
+                <div className="temperature">
+                    <span className="temperature-val">{temp}</span>
+                    <span className="temperature-unit">°C</span>
+                </div>	
+                <div className="description">{description} With {wind}</div>
+                <div className="measurement-time">{timeFormatted}</div>
             </div>
-        // </div>
+        </div>
     )
 }
 
 CurrentWeather.propTypes= {
-    current: PropTypes.any.isRequired
-    , cityName: PropTypes.string.isRequired
+    current: PropTypes.shape({
+          cod: PropTypes.oneOfType([
+                PropTypes.string
+                , PropTypes.number
+            ])
+        , message: PropTypes.string
+      })
+    , cityName: PropTypes.string
     , location: PropTypes.array.isRequired
 }
-
 
 export default view(CurrentWeather)
