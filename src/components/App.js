@@ -37,7 +37,6 @@ const App = () => {
                             selectedLegendType={as.selectedLegendType}
                             selectedForecast={as.selectedForecast}
                             handleForecastItemClick={as.handleForecastItemClick}
-                            handleForecastDetailsClose={as.handleForecastDetailsClose}
                             showForecastDetail={as.showForecastDetail} />   
                     </Results> : '' 
                 }

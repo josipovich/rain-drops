@@ -70,12 +70,6 @@ const appStore = store({
             .find(forecast => `${forecast.dt}` === timestamp) || null
         appStore.showForecastDetail = true
     }
-
-    , handleForecastDetailsClose(e) {
-        e.preventDefault()
-        e.stopPropagation()
-        appStore.showForecastDetail = false
-    }
 })
 
 export default appStore

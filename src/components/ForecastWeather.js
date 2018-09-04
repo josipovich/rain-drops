@@ -18,9 +18,7 @@ const ForecastWeather = props => (
             selectedLegendType={props.selectedLegendType}
             handleForecastItemClick={props.handleForecastItemClick} />
         {props.showForecastDetail 
-            ? <ForecastItemDetails 
-                handleForecastDetailsClose={props.handleForecastDetailsClose}
-                selectedForecast={props.selectedForecast} />
+            ? <ForecastItemDetails selectedForecast={props.selectedForecast} />
             : ''}
     </div>
 )
@@ -30,7 +28,6 @@ ForecastWeather.propTypes = {
     , legendTypeList: PropTypes.array.isRequired
     , selectedLegendType: PropTypes.string.isRequired
     , handleForecastItemClick: PropTypes.func.isRequired
-    , handleForecastDetailsClose: PropTypes.func.isRequired
     , selectedForecast: PropTypes.any
 }
 
