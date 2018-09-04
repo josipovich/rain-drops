@@ -6,7 +6,7 @@
 
 Live demo can be found [here](http://rain-drops.herokuapp.com/).
 
-![Rain Drops](http://i.imgur.com/HBPDr4Q.png)
+![Rain Drops](https://rain-drops.herokuapp.com/)
 
 Results are split in two groups: **current** and **forecast**.
 
