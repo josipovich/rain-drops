@@ -6,37 +6,39 @@ import ForecastWeather from './ForecastWeather'
 import CurrentWeather from './CurrentWeather' 
 import Form from './Form'
 import Results from './Results'
+import About from './About'
 import './../styles/App.css'
 
 
 const App = () => {
-    const as = appStore
-    const isLoading = as.forecastInProgress || as.currentInProgress
-    const showResults = as.current && as.forecast
+    const s = appStore
+    const isLoading = s.forecastInProgress || s.currentInProgress
+    const showResults = s.current && s.forecast
 
     return (
         <div className="App">
             <React.StrictMode>
-                <Form fetchData={as.fetchWeather} />                    
+                <Form fetchData={s.fetchWeather} />                    
                 { showResults 
                     ? <Results      
-                        statuses={[`${as.current.cod}`, `${as.forecast.cod}`]}
-                        message={as.current.message} >
+                        statuses={[`${s.current.cod}`, `${s.forecast.cod}`]}
+                        message={s.current.message} >
                         <CurrentWeather 
-                            current={as.current}
-                            cityName={as.current.name} 
+                            current={s.current}
+                            cityName={s.current.name} 
                             location={[
-                                as.current.coord ? as.current.coord.lat : 0, 
-                                as.current.coord ? as.current.coord.lon : 0
+                                s.current.coord ? s.current.coord.lat : 0, 
+                                s.current.coord ? s.current.coord.lon : 0
                             ]} />
                         <ForecastWeather
-                            forecast={as.forecast}                   
-                            legendTypeList={as.legendTypeList}                        
-                            selectedLegendType={as.selectedLegendType}
-                            selectedForecast={as.selectedForecast}
-                            showForecastDetail={as.showForecastDetail} />   
+                            forecast={s.forecast}                   
+                            legendTypeList={s.legendTypeList}                        
+                            selectedLegendType={s.selectedLegendType}
+                            selectedForecast={s.selectedForecast}
+                            showForecastDetail={s.showForecastDetail} />   
                     </Results> : '' 
                 }
+                <About />
                 { isLoading ? <Loading /> : '' }
             </React.StrictMode>
         </div>
