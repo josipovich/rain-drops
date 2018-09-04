@@ -4,9 +4,9 @@
 
 **Rain Drops** is React App that uses [OpenWeatherMap weather API](https://openweathermap.org/api) to show current weather and 5 day forecasts. For state management uses [React Easy State](https://github.com/solkimicreb/react-easy-state) and [leaflet](https://github.com/Leaflet/Leaflet) is used as a map.
 
-Live demo can be found [here](http://rain-drops.herokuapp.com/).
+Live demo can be found [here](https://rain-drops.herokuapp.com/).
 
-![Rain Drops](https://rain-drops.herokuapp.com/)
+![Rain Drops](https://i.imgur.com/r8VPyJf.png)
 
 Results are split in two groups: **current** and **forecast**.
 
