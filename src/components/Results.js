@@ -6,10 +6,10 @@ import Warning from './Warning'
 import './../styles/Results.css'
 
 
-const Results = props => {    
-    return statusOk(props.statuses)  
-        ? <div className="results">{props.children}</div> 
-        : <Warning message={props.message} />
+const Results = ({ statuses, children, message }) => {    
+    return statusOk(statuses)  
+        ? <div className="results">{children}</div> 
+        : <Warning message={message} />
 }
 
 Results.propTypes = {

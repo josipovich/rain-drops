@@ -3,21 +3,27 @@ import fetchWeather from '../lib/fetchWeather'
 import {statusOk} from '../lib/utils'
 
 
+const _setLoadingTo = (isLoading, store) => {
+    store.setField('currentInProgress', isLoading, store) 
+    store.setField('forecastInProgress', isLoading, store)
+}
+
 const _handleResponse = (store) => {
     return (data) => {
         const responseOk = statusOk(data.map(d => d.cod)) 
-        store.showForecastDetail = false
+        store.setField('showForecastDetail', false, store) 
         if (responseOk) {            
             data.forEach(data => {  
                 const type = data.list ? 'forecast' : 'current'
-                store[type] = data
-                store[`${type}InProgress`] = false                   
-            })            
-            store.selectedLegendType = ''
+                store.setField(type, data, store) 
+                store.setField(`${type}InProgress`, false, store)                   
+            })
+            store.setField('selectedLegendType', '', store) 
         } else {
             // data[0] b/c we don't care about mapping since both are the same in this case
-            store.forecast = store.current = data[0]
-            store.currentInProgress = store.forecastInProgress = false        
+            store.setField('current', data[0], store) 
+            store.setField('forecast', data[0], store) 
+            _setLoadingTo(false, store)
         }
         // console.log('current', store.current)
         // console.log('forecast', store.forecast)
@@ -27,8 +33,10 @@ const _handleResponse = (store) => {
 const _handleError = (store) => {
     return (err) => {
         console.error(`Ops! Perhaps check you url. ${err}`)
-        store.current = store.forecast = {cod: '404', message: "Something went wrong"}
-        store.currentInProgress = store.forecastInProgress = false    
+        const errMsg = {cod: '404', message: "Something went wrong"}
+        store.setField('forecast', errMsg, store) 
+        store.setField('current', errMsg, store) 
+        _setLoadingTo(false, store)
     }
 }
 
@@ -48,33 +56,22 @@ const appStore = store({
     , showForecastDetail: false
 
     , fetchWeather(store, city) {
-        store.currentInProgress = store.forecastInProgress = true
+        _setLoadingTo(true, store)
 
         Promise.all(fetchWeather(city)) // returns two promises
             .then(_handleResponse(store))
             .catch(_handleError(store))
     }   
 
-    /**
-     * Sets value to the obj
-     * @param   {Number} fieldName 0-360 angle 
-     * @param   {Number} value 0-360 angle 
-     * @param   {Number} store 0-360 angle 
-     */
     , setField(fieldName, value, store) {
         store[fieldName] = value
     }
 
     , setSelectedForecast(timestamp, store) {        
         const selectedForecast = store.forecast.list
-            // finds forecast with same timestamp
-            .find(data => `${data.dt}` === timestamp) || null           
-        store.selectedForecast = selectedForecast 
-        store.showForecastDetail = true
-    }
-
-    , setCityName(store, value) {
-        store.cityName = value
+            .find(data => `${data.dt}` === timestamp) || null   
+        store.setField('selectedForecast', selectedForecast, store) 
+        store.setField('showForecastDetail', true, store) 
     }
 })
 
