@@ -1,18 +1,33 @@
 import React from 'react'
-import {view} from 'react-easy-state'
 import appStore from './../stores/appStore'
 import './../styles/Form.css'
+import { connect } from 'react-redux'
+import { setCityName } from '../actions'
 
 
-const Form = () => {
-    const {setField, prevCityName, cityName, fetchWeather} = appStore
+const mapStateToProps = state => ({
+    cityName: state.cityName
+  })
+
+const mapDispatchToProps = dispatch => ({
+    setCityName: cityName => dispatch(setCityName(cityName))
+})   
+
+const Form = ({ cityName, setCityName }) => {
+    const {prevCityName, fetchWeather} = appStore
+
+    console.log("Form")
 
     const updateCityName = (e) => {
-        setField('cityName', e.target.value, appStore)
+        console.log('change', e.target.value)
+        setCityName(e.target.value)  
+
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log('cityName', cityName)
+
         if (prevCityName !== cityName && cityName) {   
             fetchWeather(appStore, {city: cityName})            
         }        
@@ -20,6 +35,7 @@ const Form = () => {
 
     return (
         <form className='search-form' onSubmit={handleSubmit}>
+            city name: {cityName}
             <input
                 className='search-form-input'
                 placeholder="Type in city name (eg 'London, US' or just 'london')..."
@@ -35,4 +51,20 @@ const Form = () => {
     )
 }
 
-export default view(Form)
+export default connect(
+    mapStateToProps, 
+    mapDispatchToProps
+)(Form)
+
+
+// import { connect } from 'react-redux'
+// import { setCityName } from '../actions'
+// import Form from './../components/Form'
+
+
+
+// export default connect(
+//     mapStateToProps, 
+//     mapDispatchToProps
+// )(Form)
+

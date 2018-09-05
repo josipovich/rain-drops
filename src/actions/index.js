@@ -1,40 +1,36 @@
-export const showForecast = text => ({
+// forecast weather
+export const showForecastDetails = value => ({
   type: 'SHOW_FORECAST_DETAILS',
-  id: nextTodoId++,
-  text
+  value
 })
 
-export const setVisibilityFilter = filter => ({
-  type: 'SET_VISIBILITY_FILTER',
-  filter
+export const selectLegendType = legendType => ({
+  type: 'SELECT_LEGEND_TYPE',
+  legendType
 })
 
-export const toggleTodo = id => ({
-  type: 'TOGGLE_TODO',
-  id
+export const selectForecast = forecast => ({
+  type: 'SELECT_FORECAST',
+  forecast
 })
 
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
+export const saveForecasts = forecast => ({
+  type: 'SAVE_FORECASTS_WEATHER_DATA',
+  forecast
+})
+
+
+// current weather
+export const setCityName = cityName => {
+  console.log("action.val", cityName)
+
+  return {  
+    type: 'SET_CITY_NAME',
+    cityName
+  }
 }
 
-
-
-
-
-// actions
-// 
-// inProgress
-//      current
-//      forecast 
-// setWeatherData
-//      forecast
-//      selectedForecast
-//      current
-// setField 
-//      showForecastDetail
-//      selectedLegendType
-// 
-// 
+export const saveCurrent = current => ({
+  type: 'SET_CURRENT_WEATHER_DATA',
+  current
+})
