@@ -25,7 +25,7 @@ const capitalize = str => {
             //     return first + rest
             // }
         })
-        .join(' ')
+        .join(' ');
     }
 }
 
